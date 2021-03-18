@@ -41,9 +41,10 @@ Follow The Steps Below!
 > pkg update -y
 > pkg upgrade -y
 > pkg install git -y
+> pkg install nodejs
 > git clone https://github.com/Zitsraa/bot-whatsapp
 > cd bot-whatsapp
-> bash install.sh
+> npm install
 > npm start / node index.js
 ```
 
