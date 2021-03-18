@@ -2,10 +2,10 @@
 <img src="https://avatars.githubusercontent.com/zitsraa" width="225" height="225"/>
 </p>
 <p align="center">
-<a href="#"><img title="Zitsraa" src="https://img.shields.io/badge/HANZ-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
+<a href="#"><img title="Zitsraa" src="https://img.shields.io/badge/Zitsraaシ︎-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
 </p>
 <p align="center">
-<a href="https://github.com/Zitsraa"><img title="Author" src="https://img.shields.io/badge/Author-Zitsraa-red.svg?style=for-the-badge&logo=github"></a>
+<a href="https://github.com/Zitsraa"><img title="Author" src="https://img.shields.io/badge/Author-Zitsraa-blue.svg?style=for-the-badge&logo=github"></a>
 </p>
 <p align="center">
 <a href="https://github.com/Zitsraa/followers"><img title="Followers" src="https://img.shields.io/github/followers/Zitsraa?color=blue&style=flat-square"></a>
