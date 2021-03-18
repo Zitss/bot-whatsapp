@@ -22,8 +22,7 @@
 
 ## Donasi yaa:)
 
-* [Saweria](https://saweria.co/FarhanXCo)
-* [Trakteer](https://trakteer.id/FarhanXCo)
+* [Saweria](https://saweria.co/Zitsraa)
 
 
 ## Tools
