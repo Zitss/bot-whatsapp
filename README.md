@@ -43,10 +43,8 @@ Follow The Steps Below!
 > pkg upgrade -y
 > pkg install git -y
 > git clone https://github.com/Zitsraa/bot-whatsapp
-> cd termux-bot-wa
-> npm cache clear
+> cd bot-whatsapp
 > bash install.sh
-> npm audit fix
 > npm start / node index.js
 ```
 
