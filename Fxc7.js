@@ -1001,8 +1001,9 @@ case 'gemuk':
 ┣ ❏ ${prefix}infobot
 ┣ ❏ ${prefix}pbot
 ┣ ❏ ${prefix}wame
-┣ ❏ ${prefix}liststik
-┣ ❏ ${prefix}cogab
+┣ ❏ ${prefix}ytsearch
+┣ ❏ ${prefix}phsearch
+┣ ❏ ${prefix}cogan
 ┣ ❏ ${prefix}cecan
 ┣ ❏ ${prefix}listvn
 ┣ ❏ ${prefix}listimg
@@ -1662,6 +1663,17 @@ case 'donate':
                         fs.unlinkSync(rano)
                     })
                     break
+					case 'phsearch':
+					if (!isUser) return reply(mess.only.userB)
+	
+					query = args.join(" ")
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/pornhubsearch?apikey=${LolKey}&query=${query}`, {method: 'get'})
+					teks = '=================\n'
+					for (let i of anu.result) {
+						teks += `*Title* : ${i.title}\n*Link* : ${i.link}\n*Published* : ${i.added}\n\n=================\n`
+					}
+					reply(teks.trim())
+					break
 case 'epep':
   if (!isPublic) return reply(mess.only.publikG)
 					if (args.length < 1) return reply(mess.blank)
