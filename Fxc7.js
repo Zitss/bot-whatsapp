@@ -5933,23 +5933,30 @@ case 'playmp3':
 				break
                 
 case 'play':   
-				// Fix Case By Yogi/Hans⛔
                    if (isBanned) return reply(mess.only.benned)
                 if (!isPublic) return reply(mess.only.publikG)
 				if (!isUser) return reply(mess.only.userB)    
 				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
                 reply(mess.wait)
 				play = body.slice(6)
-				anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?q=${play}&apikey=apivinz`)
+				anu = await fetchJson(`https://api.xteam.xyz/dl/play?lagu=${play}&APIKEY=${XteamKey}`)
 				if (anu.error) return reply(anu.error)
-				infomp3 = `*Lagu Ditemukan!!!*\nJudul : ${anu.result.title}\nSource : ${anu.result.source}\nUkuran : ${anu.result.size}\n\n*TUNGGU SEBENTAR LAGI DIKIRIM MOHON JANGAN SPAM YA SAYANG*`
-				buffer = await getBuffer(anu.result.thumbnail)
-				Zitsraa.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
-				lagu = await getBuffer(anu.result.url_audio)
-				Zitsraa.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.result.title}.mp3`, quoted: mek})
+				infomp3 = ` *Lagu Ditemukan!!!*
+				
+Judul : ${anu.judul}
+Size : ${anu.size}
+				
+*Wait Kak....*\n*Zitsraa sedang mengirim lagu nya...*
+
+
+*_Link Download nya kaka_*
+Source : ${anu.url}`
+				buffer = await getBuffer(anu.thumbnail)
+				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: infomp3})
+				lagu = await getBuffer(anu.url)
+				Zitsraa.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.url}.mp3`, quoted: freply})
 				await limitAdd(sender)
 				break
-                
                 
 case 'playgg':
                 if (isBanned) return reply(mess.only.benned)
