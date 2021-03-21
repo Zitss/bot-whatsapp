@@ -1171,6 +1171,10 @@ case 'gemuk':
 ┣ ❏ ${prefix}puisiimg
 ┣ ❏ ${prefix}asupan
 ┣ ❏ ${prefix}tebakgambar
+┣ ❏ ${prefix}tebakumur
+┣ ❏ ${prefix}tebakangka
+┣ ❏ ${prefix}vslot
+┣ ❏ ${prefix}suit
 ┣ ❏ ${prefix}caklontong
 ┣ ❏ ${prefix}family100
 ┣ ❏ ${prefix}memeindo
@@ -1227,7 +1231,7 @@ case 'gemuk':
 ┣◪ 「 *OWNER* 」
 ┃
 ┣ ❏ ${prefix}addprem
-┣ ❏ ${prefix}removeprem
+┣ ❏ ${prefix}dellprem
 ┣ ❏ ${prefix}hanzprem
 ┣ ❏ ${prefix}setmemlimit
 ┣ ❏ ${prefix}setlimit
@@ -1625,7 +1629,83 @@ case 'donate':
 					
 
 					
-					
+					case 'tebakumur':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/tebakumur?apikey=${LolKey}&name=${body.slice(11)}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *Umur* 」
+                    
+• Nama : ${anu.result.name}
+• Umur : ${anu.result.age}
+      
+   *Note :* _Jaga kesehatan ka_`
+                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
+                    await limitAdd(sender) 
+                    break
+
+
+case 'suit':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`https://api.xteam.xyz/game/suit?q=${body.slice(6)}&APIKEY=${XteamKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *SUIT* 」
+                    
+• Hasil : ${anu.hasil}
+
+• Suit Kamu : ${anu.jawabanmu}
+• Suit BOT  : ${anu.jawabanbot}
+
+*Point* : ${anu.poin}`
+                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
+                    await limitAdd(sender) 
+                    break
+
+
+
+
+
+case 'tebakangka':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`http://api.xteam.xyz/game/tebakangka?q=${body.slice(12)}&APIKEY=${XteamKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *Angka* 」
+                    
+• Jawaban mu  : ${anu.jawabanmu}
+• Jawaban BOT : ${anu.jawabanbot}
+      
+   *Note :* ${anu.hasil} 
+   *Poin :* ${anu.poin}`
+                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
+                    await limitAdd(sender) 
+                    break
+
+
+case 'vslot':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+		truteh = await getBuffer(`https://i.ibb.co/MM6b65Y/d0fbc39734dc.jpg`)
+                    anu = await fetchJson(`https://api.xteam.xyz/game/virtualslot?APIKEY=${XteamKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *Virtual SLOT* 」
+                    
+• Map : ${anu.map}
+• Hasil : ${anu.hasil}
+• Poin : ${anu.score}`
+                  Zitsraa.sendMessage(from, truteh, image,{quoted: freply, caption: hasil})
+                    await limitAdd(sender) 
+                    break
+
 					
 				case 'unban':
 					if (!isOwner)return reply(mess.only.ownerB)
