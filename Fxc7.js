@@ -65,7 +65,7 @@ const { wait, simih, getBuffer, h2k, generateMessageID, getGroupAdmins, getRando
 
 const vcard = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n'
-            + 'FN:Zitsraa\n'
+            + 'FN:Zitsraaシ︎\n'
             + 'ORG:Owner Hanz;\n'
             + 'TEL;type=CELL;type=VOICE;waid=6281226770537:+62 831-1800-241\n'
             + 'END:VCARD'
@@ -388,15 +388,15 @@ const isLevelingOn = isGroup ? _leveling.includes(from) : false
 			const isPrem = premium.includes(sender)
 			
 			
-const freply4 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Kontol", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('temp/test.jpeg')} } }
+const freply4 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Kontol", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
 		
 			
 			
 			
-const freply3 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Gajelas banget Lu", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('temp/test.jpeg')} } }
+const freply3 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Gajelas banget Lu", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
 		
-const freply2 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Ngapain Tag Gua anjg?", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('temp/test.jpeg')} } }
-const freply = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Zitsraa-BOTシ", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('temp/test.jpeg')} } }
+const freply2 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Ngapain Tag Gua anjg?", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
+const freply = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Zitsraa-BOTシ", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
 			
 			const mentions = (teks, memberr, id) => {
 				(id == null || id == undefined || id == false) ? Zitsraa.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : Zitsraa.sendMessage(from, teks.trim(), extendedText, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Zitsraaシ︎", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }, contextInfo: {"mentionedJid": memberr}})
@@ -776,7 +776,7 @@ case 'blackpink':
 				break 
 				
 				
-case 'ig':
+case 'ivvg':
   if (!isUser) return reply(mess.only.userB)
   
   reply(mess.wait)
@@ -1280,145 +1280,145 @@ Zitsraa.sendMessage(from, asoo, image, { quoted: freply, caption: zitsraa })
 					
 		
 					
-case 'sadboy': // Update By RzkyO & ItsmeikyXSec404				
+case 'bocil': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
-				ct = body.slice(8)
+				ct = body.slice(6)
 				reply(`[❕] Loading`)
-				buffer = await getBuffer(`https://rzky.net/CilEpepSerti/img.php?nama=${ct}`)
+				buffer = await getBuffer(`https://onlydevcity.xyz/CilEpepSerti/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
 					
 					
 					
-case 'tweetfake': // Update By RzkyO & ItsmeikyXSec404				
+case 'tweetfake': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(11)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/Tweet/?text=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'babu': // Update By RzkyO & ItsmeikyXSec404				
+		case 'babu': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(6)
 				reply(`[❕] Loading`)
-				buffer = await getBuffer(`http://rzky.net/docs/api/BabuSerti/img.php?nama=${ct}`)
+				buffer = await getBuffer(`http://onlydevcity.xyz/docs/api/BabuSerti/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'bucinserti': // Update By RzkyO & ItsmeikyXSec404				
+		case 'bucinserti': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(12)
 				reply(`[❕] Loading`)
-				buffer = await getBuffer(`http://rzky.net/docs/api/BucinSerti/img.php?nama=${ct}`)
+				buffer = await getBuffer(`http://onlydevcity.xyz/docs/api/BucinSerti/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'bocilepep': // Update By RzkyO & ItsmeikyXSec404				
+		case 'bocilepep': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(11)
 				reply(`[❕] Loading`)
-				buffer = await getBuffer(`http://rzky.net/docs/api/CilEpepSerti/img.php?nama=${ct}`)
+				buffer = await getBuffer(`http://onlydevcity.xyz/docs/api/CilEpepSerti/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
 					
 					
-case 'fftourserti2': // Update By RzkyO & ItsmeikyXSec404				
+case 'fftourserti2': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/FFSerti2/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'fftourserti3': // Update By RzkyO & ItsmeikyXSec404				
+		case 'fftourserti3': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/FFSerti3/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'fftourserti4': // Update By RzkyO & ItsmeikyXSec404				
+		case 'fftourserti4': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/FFSerti4/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'fftourserti5': // Update By RzkyO & ItsmeikyXSec404				
+		case 'fftourserti5': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/FFSerti5/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'pubgtourserti': // Update By RzkyO & ItsmeikyXSec404				
+		case 'pubgtourserti': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(15)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/PubgTourSerti/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'pubgtourserti2': // Update By RzkyO & ItsmeikyXSec404				
+		case 'pubgtourserti2': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(16)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/PubgTourSerti2/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'pubgtourserti3': // Update By RzkyO & ItsmeikyXSec404				
+		case 'pubgtourserti3': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(16)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/PubgTourSerti3/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'pubgtourserti4': // Update By RzkyO & ItsmeikyXSec404				
+		case 'pubgtourserti4': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(16)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/PubgTourSerti4/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'pubgtourserti5': // Update By RzkyO & ItsmeikyXSec404				
+		case 'pubgtourserti5': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(16)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/PubgTourSerti5/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'mltourserti': // Update By RzkyO & ItsmeikyXSec404				
+		case 'mltourserti': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(16)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/MLTourSerti1/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'mltourserti1': // Update By RzkyO & ItsmeikyXSec404				
+		case 'mltourserti1': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/MLTourSerti2/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'mltourserti2': // Update By RzkyO & ItsmeikyXSec404				
+		case 'mltourserti2': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/MLTourSerti3/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'mltourserti3': // Update By RzkyO & ItsmeikyXSec404				
+		case 'mltourserti3': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/MLTourSerti4/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'mltourserti4': // Update By RzkyO & ItsmeikyXSec404				
+		case 'mltourserti4': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(14)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/MLTourSerti5/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-case 'fftourserti': // Update By RzkyO & ItsmeikyXSec404				
+case 'fftourserti': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(13)
 				reply(`[❕] Loading`)
@@ -1629,83 +1629,7 @@ case 'donate':
 					
 
 					
-					case 'tebakumur':
-                    if (isBanned) return reply(mess.only.benned)    
-   					if (!isUser) return reply(mess.only.userB)
-   					if (isLimit(sender)) return reply(limitend(pushname2))
-                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/tebakumur?apikey=${LolKey}&name=${body.slice(11)}`)
-                    reply(mess.wait)
-				//	buffer = await getBuffer(anu.result.profilehd)
-                    hasil = `「 *Umur* 」
-                    
-• Nama : ${anu.result.name}
-• Umur : ${anu.result.age}
-      
-   *Note :* _Jaga kesehatan ka_`
-                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
-                    await limitAdd(sender) 
-                    break
-
-
-case 'suit':
-                    if (isBanned) return reply(mess.only.benned)    
-   					if (!isUser) return reply(mess.only.userB)
-   					if (isLimit(sender)) return reply(limitend(pushname2))
-                    anu = await fetchJson(`https://api.xteam.xyz/game/suit?q=${body.slice(6)}&APIKEY=${XteamKey}`)
-                    reply(mess.wait)
-				//	buffer = await getBuffer(anu.result.profilehd)
-                    hasil = `「 *SUIT* 」
-                    
-• Hasil : ${anu.hasil}
-
-• Suit Kamu : ${anu.jawabanmu}
-• Suit BOT  : ${anu.jawabanbot}
-
-*Point* : ${anu.poin}`
-                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
-                    await limitAdd(sender) 
-                    break
-
-
-
-
-
-case 'tebakangka':
-                    if (isBanned) return reply(mess.only.benned)    
-   					if (!isUser) return reply(mess.only.userB)
-   					if (isLimit(sender)) return reply(limitend(pushname2))
-                    anu = await fetchJson(`http://api.xteam.xyz/game/tebakangka?q=${body.slice(12)}&APIKEY=${XteamKey}`)
-                    reply(mess.wait)
-				//	buffer = await getBuffer(anu.result.profilehd)
-                    hasil = `「 *Angka* 」
-                    
-• Jawaban mu  : ${anu.jawabanmu}
-• Jawaban BOT : ${anu.jawabanbot}
-      
-   *Note :* ${anu.hasil} 
-   *Poin :* ${anu.poin}`
-                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
-                    await limitAdd(sender) 
-                    break
-
-
-case 'vslot':
-                    if (isBanned) return reply(mess.only.benned)    
-   					if (!isUser) return reply(mess.only.userB)
-   					if (isLimit(sender)) return reply(limitend(pushname2))
-		truteh = await getBuffer(`https://i.ibb.co/MM6b65Y/d0fbc39734dc.jpg`)
-                    anu = await fetchJson(`https://api.xteam.xyz/game/virtualslot?APIKEY=${XteamKey}`)
-                    reply(mess.wait)
-				//	buffer = await getBuffer(anu.result.profilehd)
-                    hasil = `「 *Virtual SLOT* 」
-                    
-• Map : ${anu.map}
-• Hasil : ${anu.hasil}
-• Poin : ${anu.score}`
-                  Zitsraa.sendMessage(from, truteh, image,{quoted: freply, caption: hasil})
-                    await limitAdd(sender) 
-                    break
-
+					
 					
 				case 'unban':
 					if (!isOwner)return reply(mess.only.ownerB)
@@ -2719,8 +2643,8 @@ case 'glow':
                      Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: `Nih Anjim`})
                   await limitAdd(sender) 
                   break
-				case 'translate':
-				case 'translete':
+				case 'translation_idde':
+				case 'trandslete':
 				  if (!isPublic) return reply(mess.only.publikG)
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
@@ -2738,22 +2662,24 @@ case 'glow':
 				   await limitAdd(sender)
 				   break 
 				case 'ts':
-				  if (!isPublic) return reply(mess.only.publikG)
+				  case 'translate': 
+		
+				    if (args.length < 1) return Zitsraa.sendMessage(from, 'Kode Bahasanya???', text, {quoted: freply})
+				    if (args.length < 2) return Zitsraa.sendMessage(from, 'Text Yg Mau Di translate??', text, {quoted: freply})
+		  if (!isPublic) return reply(mess.only.publikG)
 				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
 				  
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				    if (args.length < 1) return Zitsraa.sendMessage(from, 'Kode Bahasanya???', text, {quoted: freply})
-				    if (args.length < 2) return Zitsraa.sendMessage(from, 'Text Yg Mau Di translate??', text, {quoted: freply})
 				    ts = body.slice(4)
 				    kode = ts.split("/")[0]
 				    teks = ts.split("/")[1]
-				    anu = await fetchJson(`https://api.arugaz.my.id/api/edu/translate?lang=${kode}&text=${teks}`)
+				    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/translate/auto/${kode}?apikey=${LolKey}&text=${teks}`)
 				    reply(mess.wait)
-				    ts = `Text Asli: *${body.slice(7)}*\n\nHasil: *${anu.text}*`
-				    Zitsraa.sendMessage(from, ts, text, {quoted: freply})
-				   await limitAdd(sender)
-				   break 
+				    ts = await getBuffer(anu.result)
+					Zitsraa.sendMessage(from, ts, text, {quoted: freply})
+					await limitAdd(sender)
+					break 
 	            case 'setpp':
 	              if (!isPublic) return reply(mess.only.publikG)
 	            if (isBanned) return reply(mess.only.benned)    
@@ -3256,21 +3182,21 @@ case 'wame':
     }
     Zitsraa.sendMessage(from, options, text, { quoted: freply } )
 				break
-case 'ttp2': // Update By RzkyO & ItsmeikyXSec404				
+case 'ttp2': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(6)
 				reply(`[❕] Loading`)
 				buffer = await getBuffer(`https://onlydevcity.xyz/ttp/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, sticker, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'anakharam': // Update By RzkyO & ItsmeikyXSec404				
+		case 'anakharam': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(11)
 				reply(`[❕] Loading`)
-				buffer = await getBuffer(`http://rzky.net/docs/api/AnakHaramSerti/img.php?nama=${ct}`)
+				buffer = await getBuffer(`http://onlydevcity.xyz/docs/api/AnakHaramSerti/img.php?nama=${ct}`)
 				Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Zzzzz'})
 				break
-		case 'heker': // Update By RzkyO & ItsmeikyXSec404				
+		case 'heker': // Update By onlydevcityO & ItsmeikyXSec404				
 				if (args.length < 1) return reply(`textnya mana om?`)	
 				ct = body.slice(6)
 				reply(`[❕] Loading`)
@@ -4131,7 +4057,21 @@ case 'phsearch':
 					reply(teks.trim())
 					break
 				
-				
+case 'stalkyt':
+					if (!isUser) return reply(mess.only.userB)
+	
+					query = args.join(" ")
+					anup = await fetchJson(`http://api.lolhuman.xyz/api/ytchannel?apikey=${LolKey}&query=${query}`, {method: 'get'})
+					teks = '=================\n'
+					for (let i of anup.result) {
+						teks += `*Channel* : ${i.channel_id}
+*Channel Name* :${i.channel_name}
+*About* : ${i.channel_about}
+*Created* : ${i.channel_created}
+=================\n`
+					}
+					reply(teks.trim())
+					break
 				
 					case 'ytsearch':
 					if (!isUser) return reply(mess.only.userB)
@@ -4625,25 +4565,82 @@ case 'tanggaljadian':
 			        break 
 			        
 
-case 'covidindo':
+case 'tebakumur':
                     if (isBanned) return reply(mess.only.benned)    
    					if (!isUser) return reply(mess.only.userB)
    					if (isLimit(sender)) return reply(limitend(pushname2))
-                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/corona/indonesia?apikey=${LolKey}`)
+                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/tebakumur?apikey=${LolKey}&name=${body.slice(11)}`)
                     reply(mess.wait)
 				//	buffer = await getBuffer(anu.result.profilehd)
-                    hasil = `「 *indonesia* 」
+                    hasil = `「 *Umur* 」
                     
-• Positif : ${anu.positif}
-• Sembuh : ${anu.Sembuh}
-• Sirawat : ${anu.dirawat}
-• Meninggoy: ${anu.meninggal}
+• Nama : ${anu.result.name}
+• Umur : ${anu.result.age}
       
-   *Note :* _Jangan keluar kalau tidak perlu anjg_`
+   *Note :* _Jaga kesehatan ka_`
                   Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
                     await limitAdd(sender) 
                     break
 
+
+case 'suit':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`https://api.xteam.xyz/game/suit?q=${body.slice(6)}&APIKEY=${XteamKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *SUIT* 」
+                    
+• Hasil : ${anu.hasil}
+
+• Suit Kamu : ${anu.jawabanmu}
+• Suit BOT  : ${anu.jawabanbot}
+
+*Point* : ${anu.poin}`
+                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
+                    await limitAdd(sender) 
+                    break
+
+
+
+
+
+case 'tebakangka':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`http://api.xteam.xyz/game/tebakangka?q=${body.slice(12)}&APIKEY=${XteamKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *Angka* 」
+                    
+• Jawaban mu  : ${anu.jawabanmu}
+• Jawaban BOT : ${anu.jawabanbot}
+      
+   *Note :* ${anu.hasil} 
+   *Poin :* ${anu.poin}`
+                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
+                    await limitAdd(sender) 
+                    break
+
+
+case 'vslot':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+		truteh = await getBuffer(`https://i.ibb.co/MM6b65Y/d0fbc39734dc.jpg`)
+                    anu = await fetchJson(`https://api.xteam.xyz/game/virtualslot?APIKEY=${XteamKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *Virtual SLOT* 」
+                    
+• Map : ${anu.map}
+• Hasil : ${anu.hasil}
+• Poin : ${anu.score}`
+                  Zitsraa.sendMessage(from, truteh, image,{quoted: freply, caption: hasil})
+                    await limitAdd(sender) 
+                    break
 
 
 			        
@@ -4817,8 +4814,16 @@ case 'cecsbsan':
 				pa = `${body.slice(10)}`
 				sa = pa.split("/")[0];
 				ngan = pa.split("/")[1];
-				anu = await fetchJson(`https://api.vhtear.com/primbonjodoh?nama=${sa}&pasangan=${ngan}&apikey=${VthearApi}`, {method: 'get'})
-				Zitsraa.sendMessage(from, `${anu.result.hasil}`, {quoted: freply})
+				anu = await fetchJson(`http://lolhuman.herokuapp.com/api/jodoh/${sa}/${ngan}?apikey=${LolKey}`, {method: 'get'})
+				buff = await getBuffer(anu.result.image)
+					reply(mess.wait)
+                    					ytt = `「 *Cloupe* 」
+					
+*Pasangan A:* ${sa}
+*Pasanhan B:* ${ngan}
+*Positif :* ${anu.result.positif}
+*Negatif :* ${anu.result.negatif}`
+					Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: ytt})
 			await limitAdd(sender) 
 			break 
 
@@ -5410,7 +5415,7 @@ case 'getvn':
 				Zitsraa.sendMessage(from, teks.trim(), extendedText, { quoted: freply, contextInfo: { "mentionedJid": audionye } })
 				break
 				
-case 'covidibebsndo': // Update By RzkyO & ItsmeikyXSec404	
+case 'covidibebsndo': // Update By onlydevcityO & ItsmeikyXSec404	
 				Zitsraa.updatePresence(from, Presence.composing) 
 				reply(`[❕] Loading`)
 				anu= await fetchJson(`http://lolhuman.herokuapp.com/api/corona/indonesia?apikey=${LolKey}`, {method: 'get'})
@@ -5422,7 +5427,7 @@ case 'covidibebsndo': // Update By RzkyO & ItsmeikyXSec404
 				break
 				
 				
-case 'istalk2': // Update By RzkyO & ItsmeikyXSec404
+case 'istalk2': // Update By onlydevcityO & ItsmeikyXSec404
 				if (args.length < 1) return reply(`username ig mana om?`)
 				reply(`[❕] Loading`)
 				anu = await fetchJson(`https://onlydevcity.herokuapp.com/api/igstalk?u=${body.slice(9)}&apikey=onlyonedeveloper`)
@@ -5432,7 +5437,7 @@ case 'istalk2': // Update By RzkyO & ItsmeikyXSec404
 				break
 				
 				
-		case 'covidglobal': // Update By RzkyO & ItsmeikyXSec404
+		case 'covidglobal': // Update By onlydevcityO & ItsmeikyXSec404
 				reply(`[❕] Loading`)
 				anu = await fetchJson(`https://onlydevcity.herokuapp.com/api/covidworld?apikey=onlyonedeveloper`)
 				teks = `➸ *Total Cases* : ${anu.result.totalCases}\n*➸ Recovered :* ${anu.result.recovered}\n*➸ Deaths :* ${anu.result.deaths}\n*➸ Active Cases :* ${anu.result.activeCases}\n*➸ Closed Cases :* ${anu.result.closedCases}\n*➸ Last Update :* ${anu.result.lastUpdate}`
@@ -6004,11 +6009,9 @@ case 'shitpost':
 				if (!isUser) return reply(mess.only.userB)
 				  
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				return reply(mess.error.lv)
+				return reply(mess.wait)
 				    meky = await fetchJson(`https://api.xteam.xyz/shitpost?APIKEY=${XteamKey}`, {method: 'get'})
-n = JSON.parse(JSON.stringify(data));
-					nimek =  n[Math.floor(Math.random() * n.length)];
-					pook = await getBuffer(nimek)
+					pook = await getBuffer(meky)
 				    Zitsraa.sendMessage(from, pook, video, { quoted: freply})
 				    await limitAdd(sender) 
 				    break  
@@ -6196,6 +6199,55 @@ mimetype: 'audio/mp3', filename: `${data.result.title}.mp3`, quoted: freply
                 Zitsraa.sendMessage(from, buff, video, {mimetype: 'video/mp4', filename: `${anu.format}.mp4`, quoted: freply})
                 await limitAdd(sender) 
                 break  
+                
+                
+                
+                case 'ig':
+       if (isBanned) return reply(mess.only.benned)
+                if (!isPublic) return reply(mess.only.publikG)
+				if (!isUser) return reply(mess.only.userB)    
+				if (!isPremiun) return reply(mess.only.premiun)
+                
+ini_link = args[0]
+					anu = await fetchJson(`https://api.xteam.xyz/dl/ig?url=${ini_link}&APIKEY=${XteamKey}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					ytt = `「 *INSTAGRAM* 」
+					
+*Nama:* ${anu.result.name}
+*User:* ${anu.result.username}
+*Like:* ${anu.result.likes}
+*Caption:* ${anu.result.caption}`
+			
+					reply(mess.wait)
+		//			buffer = await getBuffer(anu.result.data)
+					Zitsraa.sendMessage(from, ytt, text, {quoted: freply})
+					await limitAdd(sender) 
+					break 
+
+                
+case 'githubstalk':
+       if (isBanned) return reply(mess.only.benned)
+                if (!isPublic) return reply(mess.only.publikG)
+				if (!isUser) return reply(mess.only.userB)    
+				if (!isPremiun) return reply(mess.only.premiun)
+              
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/github/${body.slice(13)}?apikey=${LolKey}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					ytt = `「 *Github STALK* 」
+					
+*Url:* ${anu.result.url}
+*Nama:* ${body.slice(13)}
+*Follower:* ${anu.result.followers}
+*Following:* ${anu.result.following}
+*Location:* $${anu.result.location}
+*Bio:* ${anu.result.bio}
+`
+					 buff = await getBuffer(anu.result.avatar)
+					reply(mess.wait)
+					Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: ytt})
+					await limitAdd(sender)
+                break
+                
                 
                 
                 case 'ytmp4':
