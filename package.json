@@ -53,10 +53,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fxc7/termux-bot-wa.git"
+       "url": "https://github.com/Zitsraa/bot-whatsapp.git"
   },
   "bugs": {
-    "url": "https://github.com/Fxc7/termux-bot-wa/issues"
+    "url": "https://github.com/Zitsraa/bot-whatsapp/issues"
   },
-  "homepage": "https://github.com/Fxc7/termux-bot-wa#readme"
+  "homepage": "https://github.com/Zitsraa/bot-whatsapp#readme"
 }
