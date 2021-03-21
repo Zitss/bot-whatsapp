@@ -1128,6 +1128,7 @@ case 'gemuk':
 ┣ ❏ ${prefix}infobot
 ┣ ❏ ${prefix}pbot
 ┣ ❏ ${prefix}wame
+┣ ❏ ${prefix}shoope
 ┣ ❏ ${prefix}phsearch
 ┣ ❏ ${prefix}ytsearch
 ┣ ❏ ${prefix}stalkyt
@@ -1805,6 +1806,29 @@ case 'donate':
                         fs.unlinkSync(rano)
                     })
                     break
+
+
+case 'shoope':
+					if (!isUser) return reply(mess.only.userB)
+	
+					query = args.join(" ")
+					anu = await fetchJson(`https://api.zeks.xyz/api/shopee?apikey=apivinz&q=${query}`, {method: 'get'})
+					teks = '=================\n'
+					for (let i of anu.data) {
+						teks += `*Nama* : ${i.name}
+*Harga* :${i.harga}
+*Terjual* : ${i.terjual}
+*Lokasi* : ${i.location}
+*Cover* : ${i.cover}
+*Stock*: ${i.stock}
+*Informasi* : ${i.information}
+*Deskripsi* : ${i.desc}
+=================\n`
+					}
+					reply(teks.trim())
+					break
+				
+
 case 'epep':
   if (!isPublic) return reply(mess.only.publikG)
 					if (args.length < 1) return reply(mess.blank)
