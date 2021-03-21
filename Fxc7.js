@@ -65,7 +65,7 @@ const { wait, simih, getBuffer, h2k, generateMessageID, getGroupAdmins, getRando
 
 const vcard = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n'
-            + 'FN:Zitsraaシ︎\n'
+            + 'FN:Zitsraa\n'
             + 'ORG:Owner Hanz;\n'
             + 'TEL;type=CELL;type=VOICE;waid=6281226770537:+62 831-1800-241\n'
             + 'END:VCARD'
