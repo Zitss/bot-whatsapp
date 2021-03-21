@@ -1130,6 +1130,8 @@ case 'gemuk':
 ┣ ❏ ${prefix}wame
 ┣ ❏ ${prefix}phsearch
 ┣ ❏ ${prefix}ytsearch
+┣ ❏ ${prefix}stalkyt
+┣ ❏ ${prefix}githubstalk
 ┣ ❏ ${prefix}cogan
 ┣ ❏ ${prefix}cecan
 ┣ ❏ ${prefix}listvn
