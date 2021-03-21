@@ -46,4 +46,4 @@ let args = [path.join(file), ...process.argv.slice(2)]
   })
   // console.log(p)
 }
-start('Fxc7.js')
+start('zitsraa.js')
