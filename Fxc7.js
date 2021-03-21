@@ -13,13 +13,13 @@ const moment = require('moment-timezone')
 const { exec } = require('child_process')
 const fetch = require('node-fetch')
 const ffmpeg = require('fluent-ffmpeg')
-
+//const tiktod = require('tiktok-scraper')
 const google = require('google-it')
 const imageToBase64 = require('image-to-base64')
 const speed = require('performance-now')
 const imgbb = require('imgbb-uploader')
-
-
+const toMs = require('ms')
+const ms = require('parse-ms')
 
 const { removeBackgroundFromImageFile } = require('remove.bg')
 const brainly = require('brainly-scraper')
@@ -38,6 +38,7 @@ const nsfw = JSON.parse(fs.readFileSync('./database/json/nsfw.json'))
 const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
 const samih = JSON.parse(fs.readFileSync('./database/json/simi.json'))
 const user = JSON.parse(fs.readFileSync('./database/json/user.json'))
+const premiun = JSON.parse(fs.readFileSync('./database/json/userprem.json'))
 const _leveling = JSON.parse(fs.readFileSync('./database/json/leveling.json'))
 const _level = JSON.parse(fs.readFileSync('./database/json/level.json'))
 const publik = JSON.parse(fs.readFileSync('./database/json/public.json'))
@@ -91,6 +92,22 @@ function kyun(seconds){
 
   return `${pad(hours)} Jam ${pad(minutes)} Menit ${pad(seconds)} Detik`
 }
+function tanggal(){
+myMonths = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+			myDays = ['Minggu','Senin','Selasa','Rabu','Kamis','Jum at','Sabtu'];
+			var tgl = new Date();
+			var day = tgl.getDate()
+			bulan = tgl.getMonth()
+			var thisDay = tgl.getDay(),
+			thisDay = myDays[thisDay];
+			var yy = tgl.getYear()
+			var year = (yy < 1000) ? yy + 1900 : yy;
+			return `${thisDay}, ${day} - ${myMonths[bulan]} - ${year}`
+}
+
+function monospace(string) {
+return '```' + string + '```'
+}
 function addMetadata(packname, author) {
 				if (!packname) packname = 'termux-bot-wa'; if (!author) author = ' Zitsraa';
 				author = author.replace(/[^a-zA-Z0-9]/g, '');
@@ -134,6 +151,62 @@ const littleEndian = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00
 				}
 			)
 		}
+		
+		
+		
+const createSerial = (size) => {
+		return crypto.randomBytes(size).toString('hex').slice(0, size)
+		}
+
+const limitAdd = (sender) => {
+		let position = false
+		Object.keys(_limit).forEach((i) => {
+		if (_limit[i].id == sender) {
+		position = i 
+		}
+	}
+)
+		if (position !== false) {
+		_limit[position].limit += 1
+		fs.writeFileSync('./database/json/limit.json', JSON.stringify(_limit))
+		}
+	} 
+const getAllPremiumUser = () => {
+		const array = []
+		Object.keys(premium).forEach((i) => {
+		array.push(premium[i].id)
+		})
+		return array
+		}
+const getPremiumExpired = (sender) => {
+		let position = null
+		Object.keys(premium).forEach((i) => {
+		if (premium[i].id === sender) {
+		position = i 
+		}
+	})
+		if (position !== null) {
+		return premium[position].expired 
+	}
+} 
+const expiredCheck = () => {
+		setInterval(() => {
+		let position = null
+		Object.keys(premium).forEach((i) => {
+		if (Date.now() >= premium[i].expired) {
+		position = i 
+		}
+	}
+)
+		if (position !== null) {
+		console.log(`Premium expired: ${premium[position].id}`)
+		premium.splice(position, 1)
+		fs.writeFileSync('./database/json/userprem.json', JSON.stringify(premium)) 
+		}
+	}, 1000)
+}
+		
+		
 async function starts() {
 	const Zitsraa = new WAConnection()
 	Zitsraa.logger.level = 'warn'
@@ -182,7 +255,7 @@ Admin : 𝙁𝙖𝙡𝙨𝙚 >_<
      𝘚𝘪𝘭𝘢𝘩𝘬𝘢𝘯 𝘱𝘦𝘳𝘢𝘵𝘶𝘩𝘪 𝘱𝘦𝘳𝘢𝘵𝘶𝘢𝘯 𝘎𝘳𝘰𝘶𝘱 𝘪𝘯𝘪!
      𝘑𝘢𝘯𝘨𝘢𝘯 𝘭𝘶𝘱𝘢 𝘪𝘯𝘵𝘳𝘰𝘯𝘺𝘢 𝘬𝘢𝘬 >_<
      
- 𝘊𝘰𝘮𝘮𝘢𝘯𝘥 𝘉𝘖𝘛 𝘛𝘺𝘱𝘦 : #menu`
+ 𝘊𝘰𝘮𝘮𝘢𝘯𝘥 𝘉𝘖𝘛 𝘛𝘺𝘱𝘦 : ${prefix}menu`
 
 				let buff = await getBuffer(ppimg)
 				Zitsraa.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
@@ -271,6 +344,7 @@ const createSerial = (size) => {
 					benned: '*ᴍᴀᴀꜰ ɴᴏᴍᴇʀ ᴋᴀᴍᴜ ᴋᴇ ʙᴀɴɴᴇᴅ ꜱɪʟᴀʜᴋᴀɴ ʜᴜʙᴜɴɢɪ ᴏᴡɴᴇʀ ᴀɢᴀʀ ᴍᴇᴍʙᴜᴋᴀ ʙᴀɴɴᴇᴅ ᴀɴᴅᴀ*',
 					ownerG: '*ᴍᴀᴀꜰ ᴩᴇʀɪɴᴛᴀʜ ɪɴɪ ʜᴀɴyᴀ ʙɪꜱᴀ ᴅɪ ɢᴜɴᴀᴋᴀɴ ᴏʟᴇʜ ᴏᴡɴᴇʀ ɢʀᴏᴜᴩ!*',
 					ownerB: '*ᴍᴀᴀꜰ ᴩᴇʀɪɴᴛᴀʜ ɪɴɪ ʜᴀɴyᴀ ʙɪꜱᴀ ᴅɪ ɢᴜɴᴀᴋᴀɴ ᴏʟᴇʜ ᴏᴡɴᴇʀ ʙᴏᴛ!* ',
+					premiun: ' *Maaf fitur ini khusus Premium*',
 					premium: '*ᴍᴀᴀꜰ ꜰɪᴛᴜʀ ɪɴɪ ᴋʜᴜꜱᴜꜱ ᴜꜱᴇʀ ᴩʀᴇᴍɪᴜᴍ!!*',
 					userB: `────「 Unregistered 」────
   
@@ -309,8 +383,17 @@ const isLevelingOn = isGroup ? _leveling.includes(from) : false
 			const isAntiLink = isGroup ? antilink.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
 			const isUser = user.includes(sender)
+			const isPremiun = premiun.includes(sender) || isOwner
 			const isBanned = ban.includes(sender)
 			const isPrem = premium.includes(sender)
+			
+			
+const freply4 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Kontol", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
+		
+			
+			
+			
+const freply3 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Gajelas banget Lu", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
 		
 const freply2 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Ngapain Tag Gua anjg?", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
 const freply = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "Zitsraa-BOTシ", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('image/test.jpeg')} } }
@@ -565,6 +648,20 @@ if (isGroup && isUser && isLevelingOn) {
                 fs.writeFileSync('./database/json/limit.json', JSON.stringify(_limit))
             }
         }
+        
+expiredCheck()
+			var premi = '*NOT PREMIUM*'
+			if (isPremiun) {
+			premi = '*YES PREMIUM*'
+			} 
+			if (isOwner) {
+			premi = '*UNLIMITED PREMIUM*'
+			}
+        
+const sleep = async (ms) => {
+return new Promise(resolve => setTimeout(resolve, ms));
+}
+        
 
        if (messagesLink.includes("://chat.whatsapp.com/")){
 		if (!isGroup) return
@@ -593,6 +690,30 @@ if(budy.match('@6281804680327')){
 result = fs.readFileSync(`./temp/stick/tag.webp`)
   Zitsraa.sendMessage(from, result, sticker, {
 quoted: freply2
+  })
+}
+if(budy.match('gjelas')){
+result = fs.readFileSync(`./temp/stick/gj.webp`)
+  Zitsraa.sendMessage(from, result, sticker, {
+quoted: freply3
+  })
+}
+if(budy.match('gjls')){
+result = fs.readFileSync(`./temp/stick/gj.webp`)
+  Zitsraa.sendMessage(from, result, sticker, {
+quoted: freply3
+  })
+}
+if(budy.match('mengontol')){
+result = fs.readFileSync(`./temp/stick/ktl.webp`)
+  Zitsraa.sendMessage(from, result, sticker, {
+quoted: freply4
+  })
+}
+if(budy.match('gajelas')){
+result = fs.readFileSync(`./temp/stick/gj.webp`)
+  Zitsraa.sendMessage(from, result, sticker, {
+quoted: freply3
   })
 }
 
@@ -675,7 +796,7 @@ mimetype: 'video/mp4', filename: `Imlexa.mp4`, quoted: freply
 				
 				case 'verify':
 					Zitsraa.updatePresence(from, Presence.composing)
-					if (isUser) return reply('kamu sudah Menjadi Temen Hanz BOT:D')
+					if (isUser) return reply('Nomor kamu telah Terdaftar di database Zitsraa-BOTシ')
 					if (isBanned) return reply(mess.only.benned)
 					user.push(sender)
 					fs.writeFileSync('./database/json/user.json', JSON.stringify(user))
@@ -769,10 +890,13 @@ case 'gemuk':
 					}
 					zitsraa = `┏━━━━《 Zitsraa-BOTシ︎ 》━━━━
 ┃        
-┣◪ 「 *USER STATUS* 」
+┣◪ 「 *INFO* 」
 ┃
-┣ ❏ NAMA : ${pushname2}
-┣ ❏ USER BOT : ${user.length}
+┣ ❏ NAMA       :  ${pushname2}
+┣ ❏ USER BOT   :  ${user.length}
+┣ ❏ Owner      :  Zitsraaシ
+┣ ❏ LibBot by  :  Baileys
+┣ ❏ Prefix     :「 ${prefix} 」
 ┃
 ┣◪ 「 *Readmore* 」
 ┃
@@ -838,7 +962,9 @@ case 'gemuk':
 ┣ ❏ ${prefix}tomp3
 ┣ ❏ ${prefix}toptt
 ┣ ❏ ${prefix}slapimg
+┣ ❏ ${prefix}tolol
 ┣ ❏ ${prefix}phcoment
+┣ ❏ ${prefix}ytcoment
 ┣ ❏ ${prefix}freefire
 ┣ ❏ ${prefix}wetglass
 ┣ ❏ ${prefix}multicolor3d
@@ -866,6 +992,7 @@ case 'gemuk':
 ┣ ❏ ${prefix}hologram3d
 ┣ ❏ ${prefix}birthdaycake
 ┣ ❏ ${prefix}galaxybat 
+┣ ❏ ${prefix}gta
 ┣ ❏ ${prefix}snow3d 
 ┣ ❏ ${prefix}goldplaybutton 
 ┣ ❏ ${prefix}silverplaybutton 
@@ -961,7 +1088,7 @@ case 'gemuk':
 ┣ ❏ ${prefix}nsfwtrap
 ┣ ❏ ${prefix}hentai
 ┣ ❏ ${prefix}simih
-┣ ❏ ${prefix}hanz
+┣ ❏ ${prefix}zitsraa
 ┃
 ┣◪ 「 *FUN* 」
 ┃
@@ -1001,8 +1128,8 @@ case 'gemuk':
 ┣ ❏ ${prefix}infobot
 ┣ ❏ ${prefix}pbot
 ┣ ❏ ${prefix}wame
-┣ ❏ ${prefix}ytsearch
 ┣ ❏ ${prefix}phsearch
+┣ ❏ ${prefix}ytsearch
 ┣ ❏ ${prefix}cogan
 ┣ ❏ ${prefix}cecan
 ┣ ❏ ${prefix}listvn
@@ -1047,6 +1174,8 @@ case 'gemuk':
 ┣ ❏ ${prefix}caklontong
 ┣ ❏ ${prefix}family100
 ┣ ❏ ${prefix}memeindo
+┣ ❏ ${prefix}memeen
+┣ ❏ ${prefix}meme
 ┣ ❏ ${prefix}kalkulator 
 ┣ ❏ ${prefix}apkmod
 ┣ ❏ ${prefix}moddroid 
@@ -1056,9 +1185,11 @@ case 'gemuk':
 ┃
 ┣ ❏ ${prefix}randomkpop
 ┣ ❏ ${prefix}cersex
+┣ ❏ ${prefix}ceritahoror
 ┣ ❏ ${prefix}cerpen
 ┣ ❏ ${prefix}randombokep
 ┣ ❏ ${prefix}coli
+┣ ❏ ${prefix}xxz
 ┣ ❏ ${prefix}pornhub 
 ┣ ❏ ${prefix}xvideos 
 ┣ ❏ ${prefix}nekopoi 
@@ -1345,7 +1476,7 @@ case 'pbot':
   if (!isPublic) return reply(mess.only.publikG)
     				await costum(hanz(prefix), text, FarhanGans, rmenu)
     				break
-    				case 'level':
+    				case 'levffel':
     				  if (!isPublic) return reply(mess.only.publikG)
     				  await costum(kontl(pushname2, sender, getLevelingXp, getLevelingLevel), text, FarhanGans,
     				  meymec)
@@ -1455,7 +1586,7 @@ case 'donate':
 					ben += `Total : ${ban.length}`
 					Zitsraa.sendMessage(from, ben.trim(), extendedText, {quoted: freply, contextInfo: {"mentionedJid": ban}})
 					break
-				case 'premiumlist':
+				case 'premiumlisdt':
 				  if (!isPublic) return reply(mess.only.publikG)
 					Zitsraa.updatePresence(from, Presence.composing) 
 					  
@@ -1477,7 +1608,7 @@ case 'donate':
 			        ban = mentioned
 					reply(`berhasil banned : ${ban}`)
 					break
-				case 'addprem':
+				case 'addprem1':
 					Zitsraa.updatePresence(from, Presence.composing)
 					if (args.length < 1) return
 					if (!isOwner) return reply(mess.only.ownerB)
@@ -1485,12 +1616,17 @@ case 'donate':
 					premium = addpremium
 					reply(`*Berhasil Menambahkan ${premium} Ke database User Premium*`)
 					break
-				case 'removeprem':
+				case 'removeprem1':
 					if (!isOwner) return reply(mess.only.ownerB)
 					rprem = body.slice(13)
 					premium.splice(`${rprem}@s.whatsapp.net`, 1)
 					reply(`Berhasil Remove wa.me/${rprem} Dari User Premium`)
 					break
+					
+
+					
+					
+					
 				case 'unban':
 					if (!isOwner)return reply(mess.only.ownerB)
 					bnnd = body.slice(8)
@@ -1663,17 +1799,6 @@ case 'donate':
                         fs.unlinkSync(rano)
                     })
                     break
-					case 'phsearch':
-					if (!isUser) return reply(mess.only.userB)
-	
-					query = args.join(" ")
-					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/pornhubsearch?apikey=${LolKey}&query=${query}`, {method: 'get'})
-					teks = '=================\n'
-					for (let i of anu.result) {
-						teks += `*Title* : ${i.title}\n*Link* : ${i.link}\n*Published* : ${i.added}\n\n=================\n`
-					}
-					reply(teks.trim())
-					break
 case 'epep':
   if (!isPublic) return reply(mess.only.publikG)
 					if (args.length < 1) return reply(mess.blank)
@@ -2088,7 +2213,7 @@ if (!isGroup) return reply(mess.only.group)
 					break
 					
 
-		case 'lvv':
+		case 'level':
                 if (!isUser) return reply(mess.only.userB)
 if (!isGroup) return reply(mess.only.group)
                 const userLevel = getLevelingLevel(sender)
@@ -2312,7 +2437,7 @@ case 'metalteks':
 				if (!isUser) return reply(mess.only.userB)
 				  
 				if (isLimit(sender)) return reply(limitend(pushname2))
-					if (args.length < 1) return Zitsraa.sendMessage(from, `Kode bahasanya mana gan?\n Kalo Gatau Kode Bahasanya Apa Aja Ketik Saja *${prefix}bahasa*`, text, {quoted: freply})
+					 Zitsraa.sendMessage(from, `Kode bahasanya mana gan?\n Kalo Gatau Kode Bahasanya Apa Aja Ketik Saja *${prefix}bahasa*`, text, {quoted: freply})
 					const gtts = require('./lib/gtts')(args[0])
 					if (args.length < 2) return Zitsraa.sendMessage(from, 'Textnya mana gan?', text, {quoted: freply})
 					dtt = body.slice(8)
@@ -2361,6 +2486,35 @@ case 'slapimg':
                      buff = await getBuffer(`https://api.zeks.xyz/api/slap?apikey=apivinz&img1=https://1.bp.blogspot.com/-x8KhcOBG-yw/XiU4pi1yWVI/AAAAAAAADBA/gK8tsLyc1lQ808A348IKzDCjf6fUBKONwCLcBGAsYHQ/s1600/${tesdo}.jpg&img2=https://img.tek.id/img/content/2019/06/01/16833/whatsapp-tak-lagi-bisa-simpan-foto-profil-C7fSwKVQ2i.jpg
 				`, {method: 'get'})
                      Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: `Whatsapp ${tesdo}`})
+                  await limitAdd(sender) 
+                  break  
+				
+				
+case 'ytcoment':
+                if (!isUser) return reply(mess.only.userB)
+                  
+                if (isLimit(sender)) return reply(limitend(pushname2))
+                if (isBanned) return reply(mess.only.benned)
+                babio = `${body.slice(10)}`
+                     if (args.length < 1) return reply('Teksnya mana gan??')
+                     if (args.length > 10) return reply('karakter minimal 10')
+                     buff = await getBuffer(`http://lolhuman.herokuapp.com/api/ytcomment?apikey=${LolKey}&username=${pushname2}&comment=${babio}&img=https://i.ibb.co/JdfQ73m/photo-2021-02-05-10-13-39.jpg
+				`, {method: 'get'})
+                     Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: `YouTube Comment ${babio}`})
+                  await limitAdd(sender) 
+                  break  
+				
+case 'tolol':
+                if (!isUser) return reply(mess.only.userB)
+                  
+                if (isLimit(sender)) return reply(limitend(pushname2))
+                if (isBanned) return reply(mess.only.benned)
+                babio = `${body.slice(7)}`
+                     if (args.length < 1) return reply('Teksnya mana gan??')
+                     if (args.length > 10) return reply('karakter minimal 10')
+                     buff = await getBuffer(`http://lolhuman.herokuapp.com/api/toloserti?apikey=${LolKey}&name=${babio}
+				`, {method: 'get'})
+                     Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: `Tolol  ${babio}`})
                   await limitAdd(sender) 
                   break  
 				
@@ -2675,6 +2829,17 @@ if (!isPublic) return reply(mess.only.publikG)
 					Zitsraa.sendMessage(from, icon, image, {quoted: freply})
 					break
 					
+case 'fakeid':
+			if (!isUser) return reply(mess.only.userB)
+           	
+			anu = await fetchJson(`https://kagami-api.herokuapp.com/api/fakeid?key=Kagami`)
+			Zitsraa.sendMessage(from, `${anu.data}`, text, {quoted: freply})
+			reply(anu.data)
+			await limitAdd(sender) 
+			break  
+					
+					
+					
 				case 'truth':
 				  if (!isPublic) return reply(mess.only.publikG)
 				if (isBanned) return reply(mess.only.benned)    
@@ -2699,6 +2864,30 @@ if (!isPublic) return reply(mess.only.publikG)
 					Zitsraa.sendMessage(from, tod, image, { quoted: freply, caption: '*Dare*\n\n'+ der })
 					await limitAdd(sender) 
 					break 
+					
+					
+case 'quote':
+				  if (!isPublic) return reply(mess.only.publikG)
+				if (isBanned) return reply(mess.only.benned)    
+				if (!isUser) return reply(mess.only.userB)
+				  
+				if (isLimit(sender)) return reply(limitend(pushname2))
+					anu = await fetchJson(`https://api.zeks.xyz/api/quote?apikey=apivinz`, {method: 'get'})
+					ttrth = `${anu.result}`
+					try{
+					ppimg = await Zitsraa.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
+					} catch {
+					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+					}
+					Zitsraa.sendMessage(from, ppimg, image, { caption: `*Quote*\n\n`+ ttrth, quoted: freply })
+					await limitAdd(sender) 
+					break 
+		
+		
+		
+		
+		
+		
 case 'party':
   if (!isPublic) return reply(mess.only.publikG)
 				if (isBanned) return reply(mess.only.benned)    
@@ -2828,7 +3017,7 @@ case 'aesthetic':
 					if (args.length < 1) return reply('Urlnya mana gan?')
 					teks = `${body.slice(7)}`
 					reply(mess.wait)
-					anu = await fetchJson(`https://mhankbarbar.tech/api/url2image?tipe=tablet&url=${teks}&apiKey=${BarBarApi}`)
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/ssweb?apikey=${LolKey}&url=${teks}`)
 					ssweb = await getBuffer(anu.result)
 					Zitsraa.sendMessage(from, ssweb, image, {quoted: freply})
 					await limitAdd(sender)
@@ -3380,6 +3569,26 @@ case 'cerpen':
 			reply(anu.result.cerpen)
 			await limitAdd(sender) 
 			break  
+			
+			
+case 'ceritahoror':
+                if (isBanned) return reply(mess.only.benned)    
+                if (!isUser) return reply(mess.only.userB)
+                  
+                if (isLimit(sender)) return reply(limitend(pushname2))
+                   anu = await fetchJson(`http://lolhuman.herokuapp.com/api/ceritahoror?apikey=${LolKey}`, {method: 'get'})
+                   if (anu.error) return reply(anu.error)
+                //   sex = await getBuffer(anu.result.thumbnail)
+                   reply (mess.wait)
+                   ceritah = `• *Judul:* ${anu.result.title}\n\n${anu.result.desc}`
+                   Zitsraa.sendMessage(from, ceritah,text,{quoted: mek})
+                   await limitAdd(sender) 
+                   break 
+			
+			
+			
+			
+			
                case 'cersex':
                 if (isBanned) return reply(mess.only.benned)    
                 if (!isUser) return reply(mess.only.userB)
@@ -3447,15 +3656,54 @@ case 'cerpen':
 			   reply(mess.wait)
               	    if (args.length < 1) return reply('teksnya mana gan?')
                     teks = body.slice(9)
-                    anu = await fetchJson(`https://api.vhtear.com/nekosearch?query=${teks}&apikey=${VthearApi}`, {method: 'get'})
+                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/nekopoisearch?apikey=${LolKey}&query=${teks}`, {method: 'get'})
                     teks = `===============\n`
                     for (let neko of anu.result) {
-                    teks += `Title: ${neko.title}\nDeskripsi: ${neko.detail}\n===============\n`
+                    teks += `Title: ${neko.title}\Link: ${neko.link}\n===============\n`
                     }
                     reply(teks.trim())
 			     	await limitAdd(sender) 
 			     	break  
-			     	
+case 'cekpremium':
+				const cekExp = ms(getPremiumExpired(sender) - Date.now())
+				reply(`*「 PREMIUM EXPIRED 」*\n\n➸ *ID*: ${sender.split('@')[0]}\n➸ *Premium left*: ${cekExp.days}  Hari ${cekExp.hours} Jam ${cekExp.minutes} Menit`)
+			break 
+  case 'addprem':
+			if (!isOwner) return reply(mess.only.ownerB)
+			expired = "30d"
+			const pnom = {id: `${args[0].replace("@",'')}@s.whatsapp.net`, expired: Date.now() + toMs(expired) }
+			premium.push(pnom) 
+			fs.writeFileSync('./database/json/userprem.json',JSON.stringify(premium))
+			reply(`*「 PREMIUM ADD 」*\n\n*Name* : ${pnom}\n*Expired* : 30 DAY\n*thank for order premium*`)
+		break
+		case 'dellprem':
+			if (!isOwner) return reply(mess.only.ownerB)
+			const hnom = `${args[0].replace('@','')}@s.whatsapp.net`
+			var arr = premium
+			for( var dp = 0; dp < arr.length; dp++){ 
+			if ( arr[dp] === hnom) { 
+			arr.splice(dp, 1); 
+			dp--; 
+			fs.writeFileSync('./database/json/userprem.json',JSON.stringify(arr))
+			}
+			}
+			reply(`*「 PREMIUM DELETE 」*\n*Name* : ${hnom}\n*Expired* : Now\n*Thank for order premium back soon for buying again:D*`)
+			break 
+
+case 'listprem':
+			if (!isUser) return reply(mess.only.userB)
+			let listPremi = '「 *PREMIUM USER LIST* 」\n\n'
+			let nomorList = 0
+			const deret = getAllPremiumUser()
+			const arrayPremi = []
+			for (let i = 0; i < deret.length; i++) {
+			const checkExp = ms(getPremiumExpired(deret[i]) - Date.now())
+			arrayPremi.push(getAllPremiumUser()[i])
+			nomorList++
+			listPremi += `${nomorList}. wa.me/${getAllPremiumUser()[i].split("@")[0]}\n➸ *Expired*: ${checkExp.days} day(s) ${checkExp.hours} hour(s) ${checkExp.minutes} minute(s)\n\n`
+			}
+			await reply(listPremi)
+		break
   case 'addsay':
 					if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
@@ -3599,12 +3847,12 @@ Reminder Aktif!!
 					if (args.length < 1) return reply('Urlnya mana gan?')
 					if (!isUrl(args[0]) && !args[0].includes('www.facebook.com')) return reply(mess.error.Iv)
 					reply(mess.wait)
-					anu = await fetchJson(`https://api.xteam.xyz/dl/fb?url=${args[0]}&apikey=${XteamKey}`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/facebook?apikey=${LolKey}url=${args[0]}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
 					Zitsraa.sendMessage(from, '[ WAIT ] Sedang Diproses\n\nLinknya Only Google Gan Biar Bisa Didownload', text, {quoted: freply})
-					efbe = `Title: *${anu.title}*\nSize: *${anu.filesize}\nDipublikasikan Pada: *${anu.published}*`
-					tefbe = await getBuffer(anu.thumb)
-					Zitsraa.sendMessage(from, tefbe, image, {quoted: freply, caption: efbe})
+					efbe = `Title: *${anu.result.title}*\Link: *${anu.result.link}*`
+				//	tefbe = await getBuffer(anu.thumb)
+				//	Zitsraa.sendMessage(from, efbe, image, {quoted: freply, caption: efbe})
 					buffer = await getBuffer(anu.result)
 					Zitsraa.sendMessage(from, buffer, video, {mimetype: 'video/mp4', quoted: freply, caption: 'Nih Gan'})
 					await limitAdd(sender) 
@@ -3623,31 +3871,42 @@ case 'shadow':
                                         Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: 'Nih kak gambarnya...'})
                                         await limitAdd(sender)
                                         break
-			/*case 'instaimg':
-				if (isBanned) return reply(mess.only.benned)
+		case 'instaimg':
+				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				  
+				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
-				    anu = await fetchJson(`https://alfians-api.herokuapp.com/api/ig?url=${args[0]}`, {method: 'get'})
-				    insta = getBuffer(anu.result)
-				    reply(mess.wait)
-				    Zitsraa.sendMessage(from, insta, image, {quoted: freply})
-				    await limitAdd(sender) 
-				    break  */
+				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com/')) return reply(mess.error.lv)
+				reply(mess.wait)
+					buffer = `https://api.zeks.xyz/api/ig?url=${args[0]}&apikey=${ZeksApi}`
+					voss = await fetch(buffer)
+					ftype = require('file-type')
+					vuss = await ftype.fromStream(voss.body)
+					if (vuss !== undefined) {
+					Zitsraa.sendMessage(from, await getBuffer(buffer.result.url), image, {quoted: mek, caption: mess.success})
+					} else {
+					reply(mess.error.bug)
+					}
+					 await limitAdd(sender)
+					break
 				case 'instavid':
-				if (isBanned) return reply(mess.only.benned)
+				if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				  
+				
 				if (isLimit(sender)) return reply(limitend(pushname2))
-				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
-				    anu = await fetchJson(`https://api.zeks.xyz/api/ig?url=${args[0]}&apikey=${ZeksApi}`, {method: 'get'})
-				    insta = getBuffer(anu.result)
-				    reply(mess.wait)
-				    Zitsraa.sendMessage(from, insta, video, {mimtype: 'video/mp4', filename: 'instagram'.mp4, quoted: freply})
-				    await limitAdd(sender) 
-				    break  
-				    
+				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com/')) return reply(mess.error.lv)
+				reply(mess.wait)
+					buffer = `https://api.zeks.xyz/api/ig?url=${args[0]}&apikey=${ZeksApi}`
+					voss = await fetch(buffer)
+					ftype = require('file-type')
+					vuss = await ftype.fromStream(voss.body)
+					if (vuss !== undefined) {
+					Zitsraa.sendMessage(from, await getBuffer(buffer.result.url), video, {quoted: mek, caption: mess.success})
+					} else {
+					reply(mess.error.bug)
+					}
+					 await limitAdd(sender)
+					break
 
 case 'covidcountry':
                    Zitsraa.updatePresence(from, Presence.composing) 
@@ -3780,7 +4039,17 @@ case 'ytpl':
 				await limitAdd(sender)
 				break
 				
-				
+case 'phsearch':
+					if (!isUser) return reply(mess.only.userB)
+	
+					query = args.join(" ")
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/pornhubsearch?apikey=${LolKey}&query=${query}`, {method: 'get'})
+					teks = '=================\n'
+					for (let i of anu.result) {
+						teks += `*Title* : ${i.title}\n*Link* : ${i.link}\n*Published* : ${i.added}\n\n=================\n`
+					}
+					reply(teks.trim())
+					break
 				
 				
 				
@@ -3788,26 +4057,28 @@ case 'ytpl':
 					if (!isUser) return reply(mess.only.userB)
 	
 					query = args.join(" ")
-					anu = await fetchJson(`http://api.lolhuman.xyz/api/ytsearch?apikey=${LolKey}&query=${query}`, {method: 'get'})
+					anup = await fetchJson(`http://api.lolhuman.xyz/api/ytsearch?apikey=${LolKey}&query=${query}`, {method: 'get'})
 					teks = '=================\n'
-					for (let i of anu.result) {
+					for (let i of anup.result) {
 						teks += `*Title* : ${i.title}\n*Id* : https://youtu.be/${i.videoId}\n*Published* : ${i.published}\n*Views* : ${h2k(i.views)}\n=================\n`
 					}
 					reply(teks.trim())
 					break
 				case 'tiktok':
 				if (isBanned) return reply(mess.only.benned)
-				if (!isUser) return reply(mess.only.userB)
-				  
-				if (isLimit(sender)) return reply(limitend(pushname2))
-					if (args.length < 1) return reply('Urlnya mana um?')
-					if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.error.Iv)
+                if (!isPublic) return reply(mess.only.publikG)
+				if (!isUser) return reply(mess.only.userB)    
+				if (!isPremiun) return reply(mess.only.premiun)
+                
+linktod = args[0]
+				
+					anu = await fetchJson(`https://api.xteam.xyz/dl/tiktok?url=${linktod}&APIKEY=${XteamKey}`, {method: 'get'})
+					
 					reply(mess.wait)
-					anu = await fetchJson(`https://api.xteam.xyz/dl/tiktok?url=${args[0]}&APIKEY=c81b3345e477a0c7`, {method: 'get'})
-					if (anu.error) return reply(anu.error)
-					buffer = await getBuffer(anu.result)
-					Zitsraa.sendMessage(from, buffer, video, {quoted: freply})
-					break
+					buffer = await getBuffer(anu.result.video_url)
+					Zitsraa.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.result.video_url}.mp4`, quoted: freply, caption: 'Nih Gan'})
+					await limitAdd(sender) 
+					break 
 				case 'film':
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
@@ -3815,10 +4086,10 @@ case 'ytpl':
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				if (args.length < 1) return reply('Mau Cari Film Apa?')
 				reply(mess.wait)
-				anu = await fetchJson(`http://www.omdbapi.com/?s=${body.slice(6)}&plot=full&apikey=56b1b6f0&r=json`, {method: 'get'})
+				anu = await fetchJson(`http://lolhuman.herokuapp.com/api/filmapik?apikey=${LolKey}&query=${body.slice(6)}`, {method: 'get'})
 				hasil = '=========================\n'
-				for(let film of anu.Search) {
-				hasil += `• *Title:* ${film.Title}\n• *Rilis Tahun:* ${film.Year}\n• *Type:* ${film.Type}\n• *Link:* https://m.imdb.com/title/${film.imdbID}\n=========================\n`
+				for(let film of anu.result) {
+				hasil += `• *Title:* ${film.title}\n• *Rilis Tahun:* ${film.release}\n• *description:* ${film.description}\n=========================\n`
 				}
 				reply(hasil.trim())
 				await limitAdd(sender) 
@@ -3899,7 +4170,7 @@ case 'attp':
 		if (!isUser) return reply(mess.only.userB)
 				if (isLimit(sender)) return reply(ind.limitend(pusname))
 				if (args.length < 1) return reply(`_Teksnya Mana Boss_\n*Contoh ${prefix}ttp Wajahku Ganteng*`)
-				ttp = await getBuffer(`https://api.xteam.xyz/ttp?file&text=${body.slice(5)}`)
+				ttp = await getBuffer(`http://lolhuman.herokuapp.com/api/ttp?apikey=${LolKey}&text=k${body.slice(5)}`)
 				Zitsraa.sendMessage(from, ttp, sticker, {quoted: freply})
 				break
 					
@@ -4088,33 +4359,33 @@ const kantong = checkATMuser(sender)
                   break  
                   
 case 'katakatadilan':
-			if (!isUser) return reply(ind.noregis())
+			if (!isUser) return reply(mess.only.userB)
 					gatauda = body.slice(7)
 					anu = await fetchJson(`https://xptnewapi.000webhostapp.com/newapixptn/katakatadilan.php?apikey=xptn3` , {method: 'get'})
 					reply(anu.result)
 					break
 					case 'katadoi':
-			if (!isUser) return reply(ind.noregis())
+			if (!isUser) return reply(mess.only.userB)
 					gatauda = body.slice(7)
 					anu = await fetchJson(`https://xptnewapi.000webhostapp.com/newapixptn/katadoi.php?apikey=xptn3` , {method: 'get'})
 					reply(anu.result)
 					break
 					case 'hemkel':
-			if (!isUser) return reply(ind.noregis())
+			if (!isUser) return reply(mess.only.userB)
 					gatauda = body.slice(7)
 					anu = await fetchJson(`https://xptnewapi.000webhostapp.com/newapixptn/katakatahacker.php?apikey=xptn3`, {method: 'get'})
 					reply(anu.result)
 					break
 					case 'pantun':
-			if (!isUser) return reply(ind.noregis())
+			if (!isUser) return reply(mess.only.userB)
 					gatauda = body.slice(7)
-					anu = await fetchJson(`https://xptnewapi.000webhostapp.com/newapixptn/Pantun.php?apikey=xptn3`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/random/pantun?apikey=${LolKey}`, {method: 'get'})
 					reply(anu.result)
 					break
 					case 'quoterandom':
-			if (!isUser) return reply(ind.noregis())
+			if (!isUser) return reply(mess.only.userB)
 					gatauda = body.slice(7)
-					anu = await fetchJson(`https://xptnewapi.000webhostapp.com/newapixptn/katastory.php?apikey=xptn3`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/random/quotes?apikey=${LolKey}`, {method: 'get'})
 					reply(anu.result)
 					break
                   
@@ -4274,25 +4545,70 @@ case 'tanggaljadian':
 			        break 
 			        
 
-			        
-			        
-case 'igstalk':
-               if (isBanned) return reply(mess.only.benned)    
+case 'covidindo':
+                    if (isBanned) return reply(mess.only.benned)    
    					if (!isUser) return reply(mess.only.userB)
    					if (isLimit(sender)) return reply(limitend(pushname2))
-                     hmm = await fetchJson(`https://api.zeks.xyz/api/iguser?apikey=apivinz&q=${body.slice(9)}`)
-                     buffer = await getBuffer(hmm.data.profile_pic)
-                     hasil = `Fullname : ${hmm.data.full_name}`
-                    Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: hasil})
-                    await limitAdd(sender)
-					break 
-			        
-case 'igstal1k':
-                      hmm = await fetchJson(`https://freerestapi.herokuapp.com/api/v1/igs?u=${body.slice(10)}`)
-                     buffer = await getBuffer(hmm.data.profilehd)
-                     hasil = `Fullname : ${hmm.data.fullname}\npengikut : ${hmm.data.follower}\nMengikuti : ${hmm.data.following}\nPrivate : ${hmm.data.private}\nVerified : ${hmm.data.verified}\nbio : ${hmm.data.bio}`
-                    Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: hasil})
+                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/corona/indonesia?apikey=${LolKey}`)
+                    reply(mess.wait)
+				//	buffer = await getBuffer(anu.result.profilehd)
+                    hasil = `「 *indonesia* 」
+                    
+• Positif : ${anu.positif}
+• Sembuh : ${anu.Sembuh}
+• Sirawat : ${anu.dirawat}
+• Meninggoy: ${anu.meninggal}
+      
+   *Note :* _Jangan keluar kalau tidak perlu anjg_`
+                  Zitsraa.sendMessage(from, hasil, text,{quoted: freply})
+                    await limitAdd(sender) 
                     break
+
+
+
+			        
+case 'igstalk':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`https://kagami-api.herokuapp.com/api/igs?username=${body.slice(9)}&key=Kagami`)
+                    reply(mess.wait)
+					
+                    hasil = `「 *INSTAGRAM STALKER* 」
+                    
+• Link: https://www.instagram.com/${body.slice(9)}
+• Fullname : ${anu.result.fullname}
+• Followers : ${anu.result.follower}
+• Following : ${anu.result.following}
+• Jumlah Postingan: ${anu.result.timeline}
+      
+   Bio : ${anu.result.bio}`
+   
+buffer = await getBuffer(anu.result.profile)
+                  Zitsraa.sendMessage(from, buffer, image,{quoted: freply, caption: hasil })
+                    await limitAdd(sender) 
+                    break
+			        
+
+case 'igstalk1':
+                    if (isBanned) return reply(mess.only.benned)    
+   					if (!isUser) return reply(mess.only.userB)
+   					if (isLimit(sender)) return reply(limitend(pushname2))
+                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/stalkig/${args[0]}?apikey=${LolKey}`)
+                    reply(mess.wait)
+					buffer = await getBuffer(anu.result.photo_profile)
+                    hasil = `「 *INSTAGRAM STALKER* 」
+                    
+• Fullname : ${anu.result.fullname}
+• Followers : ${anu.result.follower}
+• Following : ${anu.result.following}
+      
+   Bio : ${anu.result.bio}`
+                  Zitsraa.sendMessage(from, buffer, image,{quoted: mek, caption: hasil })
+                    await limitAdd(sender) 
+                    break
+
+
 			   case 'igstalkS':
 			   
                     if (isBanned) return reply(mess.only.benned)    
@@ -4592,7 +4908,7 @@ if (isBanned) return reply(mess.only.benned)
 					}
 					Zitsraa.sendMessage(from, teks, text, {detectLinks: false, quoted: freply})
 					break
-case 'meme':
+case 'memeen':
 					meme = await fetchJson('https://kagchi-api.glitch.me/meme/memes', { method: 'get' })
 					buffer = await getBuffer(`https://imgur.com/${meme.hash}.jpg`)
 					Zitsraa.sendMessage(from, buffer, image, {quoted: freply, caption: '.......'})
@@ -4690,7 +5006,7 @@ Zitsraa.updatePresence(from, Presence.composing)
 						reply('Suksess broadcast')
 					} else {
 						for (let _ of anu) {
-							sendMess(_.jid, `*「 ZItsraa BROADCAST 」*\n*From owner : wa.me/6281226770537*\n\n${body.slice(4)}`)
+							sendMess(_.jid, `*「 ZItsraa BROADCAST 」*\n\n\n${body.slice(4)}`)
 						}
 						reply('Suksess broadcast')
 					}
@@ -5014,15 +5330,15 @@ case 'getvn':
 				Zitsraa.sendMessage(from, teks.trim(), extendedText, { quoted: freply, contextInfo: { "mentionedJid": audionye } })
 				break
 				
-case 'covidindo': // Update By RzkyO & ItsmeikyXSec404	
+case 'covidibebsndo': // Update By RzkyO & ItsmeikyXSec404	
 				Zitsraa.updatePresence(from, Presence.composing) 
 				reply(`[❕] Loading`)
-				fucek1= await fetchJson(`https://Zitsracity.herokuapp.com/api/covidindo?apikey=onlyonedeveloper`, {method: 'get'})
-				teks = '=================\n'
-				for (let i of fucek1.result) {
-					teks += `*Kode Provinsi:* : ${i.attributes.Kode_Provi}\n*Provinsi* : ${i.attributes.Provinsi}\n*Total Positif* : ${i.attributes.Kasus_Posi}\n*Total Sembuh* : ${i.attributes.Kasus_Semb}\n*Total Meninggal* : ${i.attributes.Kasus_Meni}\n=================\n`
+				anu= await fetchJson(`http://lolhuman.herokuapp.com/api/corona/indonesia?apikey=${LolKey}`, {method: 'get'})
+				teks = '*COVID INDONESIA*\n\n'
+				for (let i of anu.result) {
+					teks += `*Positif : ${i.positif}\n*Sembuh* : ${i.sembuh}\n*SosialDist* : ${i.dirawat}\n*Meninggoy* : ${i.meninggal}`
 				}
-				reply(teks)
+				reply(teks.trim())
 				break
 				
 				
@@ -5334,10 +5650,10 @@ case 'leveling':
 				if (!isUser) return reply(mess.only.userB)
 				  
 				if (isLimit(sender)) return reply(limitend(pushname2))
-					anu = await fetchJson(`https://api.vhtear.com/funkuis&apikey=${VthearApi}`, {method: 'get'})
-					caklontong = `*${anu.result.soal}*`
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/tebak/caklontong?apikey=${LolKey}`, {method: 'get'})
+					caklontong = `*${anu.result.question}*`
 					setTimeout( () => {
-					Zitsraa.sendMessage(from, '*➸ Jawaban :* '+anu.result.jawaban+ '\n\n• Penjelasan: *'+ anu.result.desk+'*', text, {quoted: freply}) // ur cods
+					Zitsraa.sendMessage(from, '*➸ Jawaban :* '+anu.result.answer, text, {quoted: freply}) // ur cods
 					}, 30000) // 1000 = 1s,
 					setTimeout( () => {
 					Zitsraa.sendMessage(from, '_10 Detik lagi…_', text) // ur cods
@@ -5406,7 +5722,7 @@ case 'chatdelete':
     case 'delete' :
 					if (isBanned) return reply(mess.only.benned)    
 					if (!isUser) return reply(mess.only.userB)
-					Zitsraa.deleteMessage(from, { id: freply.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
+					Zitsraa.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 					break
 					
 					case 'coli':
@@ -5602,6 +5918,25 @@ case 'ytmp5':
 					pok = await getBuffer(nimek)
 					Zitsraa.sendMessage(from, pok, image, { quoted: freply })
 					break
+					
+case 'shitpost':
+				if (isBanned) return reply(mess.only.benned)
+				if (!isUser) return reply(mess.only.userB)
+				  
+				if (isLimit(sender)) return reply(limitend(pushname2))
+				return reply(mess.error.lv)
+				    meky = await fetchJson(`https://api.xteam.xyz/shitpost?APIKEY=${XteamKey}`, {method: 'get'})
+n = JSON.parse(JSON.stringify(data));
+					nimek =  n[Math.floor(Math.random() * n.length)];
+					pook = await getBuffer(nimek)
+				    Zitsraa.sendMessage(from, pook, video, { quoted: freply})
+				    await limitAdd(sender) 
+				    break  
+					
+					
+					
+					
+					
 case 'leaderboard':
 				case 'lb':
 				if (!isUser) return reply(mess.only.userB)
@@ -5644,10 +5979,14 @@ case 'xxx':
 			   reply(mess.wait)
               	    if (args.length < 1) return reply('teksnya mana gan?')
                     teks = body.slice(5)
-                    anu = await fetchJson(`https://api.vhtear.com/xxxsearch?query=${teks}&apikey=${VthearApi}`, {method: 'get'})
+                    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/xnxxsearch?apikey=${LolKey}&query=${teks}`, {method: 'get'})
                     teks = `===============\n`
                     for (let bokep of anu.result) {
-                    teks += `• Title: ${bokep.data.title}\n• Durasi: ${bokep.data.durasi}\n• Link: ${bokep.data.url}\n===============\n`
+                    teks += `• Title: ${bokep.title}
+ Upload : ${bokep.uploader}
+ Durasi: ${bokep.duration}
+ Link: ${bokep.link}
+ ===============\n`
                     }
                     reply(teks.trim())
 			     	await limitAdd(sender) 
@@ -5764,7 +6103,7 @@ mimetype: 'audio/mp3', filename: `${data.result.title}.mp3`, quoted: freply
           case 'snack':
 			if (isBanned) return reply(mess.only.benned)    
 				if (!isUser) return reply(mess.only.userB)
-				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+				if (!isPremiun) return reply(mess.only.premiun)
 				if (args.length < 1) return reply('Urlnya mana gan?')
 					if (!isUrl(args[0]) && !args[0].includes('sck')) return reply(mess.error.Iv)
                 anu = await fetchJson(`https://api-anoncybfakeplayer.herokuapp.com/sckdown?url=${args[0]}`, {method: 'get'})
@@ -5778,39 +6117,50 @@ mimetype: 'audio/mp3', filename: `${data.result.title}.mp3`, quoted: freply
                 await limitAdd(sender) 
                 break  
                 
-       case 'ytmp4':
-    				if (isBanned) return reply(mess.only.benned)    
-    				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
-    				if (!isUser) return reply(mess.only.userB)
-					if (args.length < 1) return reply('Urlnya mana gan?')
-					if (!isUrl(args[0]) && !args[0].includes('youtu.be')) return reply(mess.error.Iv)
-					anu = await fetchJson(`https://api.vhtear.com/ytdl?link=${args[0]}&apikey=${VthearApi}`, {method: 'get'})
+                
+                case 'ytmp4':
+       if (isBanned) return reply(mess.only.benned)
+                if (!isPublic) return reply(mess.only.publikG)
+				if (!isUser) return reply(mess.only.userB)    
+				if (!isPremiun) return reply(mess.only.premiun)
+                
+ini_link = args[0]
+					anu = await fetchJson(`https://api.xteam.xyz/dl/ytmp4?url=${ini_link}&APIKEY=${XteamKey}`, {method: 'get'})
 					if (anu.error) return reply(anu.error)
-					ytt = `╭─「 *YOUTUBE MP4 DOWNLOADER* 」\n│\n│• *Title:* ${anu.result.title}\n│• *Size:* ${anu.result.size}\n│• *Link:* https://www.youtu.be/${anu.result.id}\n│\n│ Tunggu Sebentar 1 menit Mungkin Agak Lama \n│ Karna Mendownload Video\n╰─────────────────────`
-					buff = await getBuffer(anu.result.imgUrl)
+					ytt = `「 *YOUTUBE MP4 * 」
+					
+*Judul:* ${anu.judul}
+*Size:* ${anu.size}
+*Source download:*
+	 ${anu.url}
+					 
+ Tunggu Sebentar kak...`
+					 buff = await getBuffer(anu.thumbnail)
 					reply(mess.wait)
-					buffer = await getBuffer(anu.result.UrlVideo)
+					buffer = await getBuffer(anu.url)
 					Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: ytt})
-					Zitsraa.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: freply, caption: 'Nih Gan'})
+					Zitsraa.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.url}.mp4`, quoted: freply, caption: 'Nih Gan'})
 					await limitAdd(sender) 
 					break 
 
 				case 'ytmp3':
                     ini_link = args[0]
-                    get_result = await fetchJson(`http://api.lolhuman.xyz/api/ytaudio?apikey=${LolKey}&url=${ini_link}`)
-                    get_result = get_result.result
-                    txt = `Title : ${get_result.title}\n`
-                    txt += `Uploader : ${get_result.uploader}\n`
-                    txt += `Duration : ${get_result.duration}\n`
-                    txt += `View : ${get_result.view}\n`
-                    txt += `Like : ${get_result.like}\n`
-                    txt += `Dislike : ${get_result.dislike}\n`
-                    txt += `Description :\n ${get_result.description}`
-                    buffer = await getBuffer(get_result.thumbnail)
-                    Zitsraa.sendMessage(from, buffer, image, { quoted: freply, caption: txt })
-                    get_audio = await getBuffer(get_result.link[3].link)
-                    Zitsraa.sendMessage(from, get_audio, audio, { mimetype: 'audio/mp4', filename: `${get_result.title}.mp3`, quoted: freply })
-                    break
+                    anu = await fetchJson(`https://api.xteam.xyz/dl/ytmp3?url=${ini_link}&APIKEY=${XteamKey}`)
+                    					ytt = `「 *YOUTUBE MP3* 」
+					
+*Judul:* ${anu.judul}
+*Size:* ${anu.size}
+*Source download:*
+	 ${anu.url}
+					 
+ Tunggu Sebentar kak...`
+					 buff = await getBuffer(anu.thumbnail)
+					reply(mess.wait)
+					buffer = await getBuffer(anu.url)
+					Zitsraa.sendMessage(from, buff, image, {quoted: freply, caption: ytt})
+					Zitsraa.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.url}.mp3`, quoted: freply})
+				await limitAdd(sender)
+				break
 
 case 'cyberpunk':
   
@@ -5853,7 +6203,7 @@ quoted: freply, caption: teks
   break
 case 'pin':
   if (!isPublic) return reply(mess.only.publikG)
-  if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+  if (!isPremiun) return reply(mess.only.premiun)
 				if (!isUser) return reply(mess.only.userB)
     if(!isUrl(args[0]) && !args[0].includes('pin')) return reply('Format link salah, gunakan link pinterest')
   reply(mess.wait)
@@ -5875,7 +6225,7 @@ mimetype: 'video/mp4', filename: `${anu.result}.mp4`, quoted: freply
   
 case 'joox2':
   if (!isPublic) return reply(mess.only.publikG)
-  if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+  if (!isPremiun) return reply(mess.only.premiun)
 				if (!isUser) return reply(mess.only.userB)
   if (args.length < 1) return reply('Masukan judul lagu')
   tels = body.slice(6)
@@ -5912,7 +6262,7 @@ case 'husbu':
            case 'play3':
              if (!isPublic) return reply(mess.only.publikG)
                 if (isBanned) return reply(mess.only.benned)    
-				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+				if (!isPremiun) return reply(mess.only.premiun)
 				if (!isUser) return reply(mess.only.userB)
                 reply(mess.wait)
                 play = body.slice(9)
@@ -5948,7 +6298,7 @@ case 'play':
                    if (isBanned) return reply(mess.only.benned)
                 if (!isPublic) return reply(mess.only.publikG)
 				if (!isUser) return reply(mess.only.userB)    
-				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+				if (!isPremiun) return reply(mess.only.premiun)
                 reply(mess.wait)
 				play = body.slice(6)
 				anu = await fetchJson(`https://api.xteam.xyz/dl/play?lagu=${play}&APIKEY=${XteamKey}`)
@@ -5970,11 +6320,12 @@ Source : ${anu.url}`
 				await limitAdd(sender)
 				break
                 
+                
 case 'playgg':
                 if (isBanned) return reply(mess.only.benned)
                 if (!isPublic) return reply(mess.only.publikG)
 				if (!isUser) return reply(mess.only.userB)    
-				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+				if (!isPremiun) return reply(mess.only.premiun)
                 reply(mess.wait)
                 play = body.slice(6)
                 try {
@@ -6002,7 +6353,7 @@ Zitsraa.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
 case 'ytplay':		
   if (!isPublic) return reply(mess.only.publikG)
 				if (isBanned) return reply(mess.only.benned)    
-				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+				if (!isPremiun) return reply(mess.only.premiun)
 				if (!isUser) return reply(mess.only.userB)
 				Zitsraa.updatePresence(from, Presence.recording) 
 				reply(mess.wait)
@@ -6018,7 +6369,7 @@ case 'ytplay':
             case 'smule':
               if (!isPublic) return reply(mess.only.publikG)
 	       if (isBanned) return reply(mess.only.benned)
-	       if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+	       if (!isPremiun) return reply(mess.only.premiun)
 				if (!isUser) return reply(mess.only.userB)
 					if (args.length < 1) return reply('Urlnya mana gan?')
 					if (!isUrl(args[0]) && !args[0].includes('c-ash.smule')) return reply(mess.error.Iv)
@@ -6052,7 +6403,7 @@ quoted: freply, caption: 'Buat apa sii..'
   fs.unlinkSync(ran)
 })
 break
-case 'cekprem':
+case 'cekggprem':
 					if (isBanned) return reply(mess.only.benned)    
 					if (!isUser) return reply(mess.only.userB)
 					if (!isPrem) return reply('*(👉`>`) yaa haha... Wahyu* \n woy sob! Kata ilham, Harus Upgrade Ke Premium Dulu Ngab :/ \n\n\n*Caranya ketik : /owner* \nNah Kalau Udah, Chat Gih Owner Aku bilang "bang gw mau Upgrade ke vip" nah gitu! ngab :v\n\nSoalnya Fitur Ini Khusus User Premium, Gak Semua Fitur Gratis Ngab :v Harga Kouta Internet Mahal, Bot Aktif Juga Menggunakan Internet' ,text, { quoted: freply })
@@ -6062,10 +6413,10 @@ case 'cekprem':
 					break
 
 
-case 'asupan':
+case 'asupvgan':
   if (!isPublic) return reply(mess.only.publikG)
 if (isBanned) return reply(mess.only.benned)    
-				if (!isPremtod) return reply('Harus mengaktifkan mode PREMIUM!!')
+				if (!isPremiun) return reply(mess.only.premiun)
 				if (!isUser) return reply(mess.only.userB)
 				
 				  
@@ -6080,18 +6431,17 @@ if (isBanned) return reply(mess.only.benned)
 				break  
 				
 				
-case 'shitpost':
+case 'asupan':
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
 				  
 				if (isLimit(sender)) return reply(limitend(pushname2))
 				return reply(mess.error.lv)
-				    meky = await fetchJson(`https://api.xteam.xyz/shitpost?APIKEY=7ba65de0de0c0088`, {method: 'get'})
-				    fucek = getBuffer(meky.result)
-				    reply(mess.wait)
-				    Zitsraa.sendMessage(from, fucek, video, {mimtype: 'video/mp4', filename: 'shitpost'.mp3, quoted: freply})
-				    await limitAdd(sender) 
-				    break  
+				    anu = await fetchJson(`http://lolhuman.herokuapp.com/api/asupan?apikey=${LolKey}`, {method: 'get'})
+				    buffer = await getBuffer(anu.result)
+					Zitsraa.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.result}.mp4`, quoted: freply, caption: 'Asupan Gan'})
+					await limitAdd(sender) 
+					break 
 				    
 				
 				
@@ -6227,16 +6577,7 @@ case 'spank':
 			reply (anu.result)
 			await limitAdd(sender) 
 			break  
-			case 'pantun':
-			  if (!isPublic) return reply(mess.only.publikG)
-			if (isLimit(sender)) return reply(limitend(pushname2))
-			if (isBanned) return reply(mess.only.benned)
-			if (!isUser) return reply(mess.only.userB)
-			  
-			anu = await fetchJson(`https://api.arugaz.my.id/api/random/text/pantun`, {method: 'get'})
-			Zitsraa.sendMessage(from, `${anu.result}`, text, {quoted: freply})
-			await limitAdd(sender) 
-			break  
+			
 			
 		case 'jamdunia':
 		  if (!isPublic) return reply(mess.only.publikG)
@@ -6420,20 +6761,37 @@ case 'pubg':
 					Zitsraa.sendMessage(from, buffer, image, {quoted: freply})
 					await limitAdd(sender) 
 					break  
-					case 'glitch':
+					case 'gta':
 				
-              	   			 if (args.length < 1) return reply(`Contoh ${prefix}glit h hanz/ganz`)
-                    			hm = `${body.slice(8)}`
-                    			text1 = hm.split("/")[0];
-                    			text2 = hm.split("/")[1];                    
-                    			glitch = await getBuffer(`https://api.vhtear.com/glitchtext?text1=${text1}&text2=${text2}&apikey=${VthearApi}`, {method: 'get'})
+              	   			 if (args.length < 1) return reply(`Contoh ${prefix}gta hanz|ganz`)
+                    			hm = `${body.slice(5)}`
+                    			text1 = hm.split("|")[0];
+                    			text2 = hm.split("|")[1];                    
+                    			glitch = await getBuffer(`http://lolhuman.herokuapp.com/api/gtapassed?apikey=${LolKey}&text1=${text1}&text2=${text2}`, {method: 'get'})
                     			Zitsraa.sendMessage(from, glitch, image, {quoted: freply, caption: 'nih mek'})
 			     		await limitAdd(sender) 
 			     		break
+			     		
+			     		
+			     		
+case 'meme':
+
+              	 		 if (args.length < 1) return reply(`Contoh ${prefix}meme ini|contol`)
+if (!isQuotedImage) return reply('Reply imagenya')
+cot = `${body.slice(6)}`
+                    			texttop = cot.split("|")[0];
+                    			textbot = cot.split("|")[1];                    
+                    			memtod = await getBuffer(`http://lolhuman.herokuapp.com/api/memegen?apikey=${LolKey}&texttop=${texttop}&textbottom=${textbot}`, {method: 'get'})
+                    			Zitsraa.sendMessage(from, memtod, image, {quoted: freply, caption: 'nih mek'})
+			     		await limitAdd(sender) 
+			     		break
+			     		
+			     		
+			     		
   case 'wolflogo':
   if (!isPublic) return reply(mess.only.publikG)
 				
-              	   			 if (args.length < 1) return reply(`Contoh ${prefix}glit h hanz/ganz`)
+              	   			 if (args.length < 1) return reply(`Contoh ${prefix}wolflogo hanz/ganz`)
                     			hm = `${body.slice(8)}`
                     			text1 = hm.split("/")[0];
                     			text2 = hm.split("/")[1];                    
@@ -6467,9 +6825,10 @@ case 'pubg':
                     case 'quotebucin':
                     if (isBanned) return reply(mess.only.benned)    
                     if (!isUser) return reply(mess.only.userB)
-                      
+ppimg = 'https://i.ibb.co/Sr8hC0g/3d10fba6bf39.jpg'
                     hasil = bucinrandom[Math.floor(Math.random() * (bucinrandom.length))]
-                    Zitsraa.sendMessage(from, '*'+hasil+'*', text, {quoted: freply})
+                 
+                    Zitsraa.sendMessage(from, '*'+hasil+'*', text,{quoted: freply})
                     await limitAdd(sender)
             break
             
@@ -6531,6 +6890,8 @@ case 'nangis':
 			await limitAdd(sender)
 			break
 				default:
+				
+
 					if (body.startsWith(`${prefix}${command}`)) {
                   reply(`Maaf Kak ${pushname2}...\nCommand *${prefix}${command}* Tidak Terdaftar Di Dalam Database *${prefix}menu*`)
                   }
