@@ -33,6 +33,7 @@ const uang = JSON.parse(fs.readFileSync('./database/json/uang.json'))
 const setiker = JSON.parse(fs.readFileSync('./temp/stik.json'))
 const audionye = JSON.parse(fs.readFileSync('./temp/vn.json'))
 const imagenye = JSON.parse(fs.readFileSync('./temp/image.json'))
+const videonye = JSON.parse(fs.readFileSync('./temp/video.json'))
 const welkom = JSON.parse(fs.readFileSync('./database/json/welkom.json'))
 const nsfw = JSON.parse(fs.readFileSync('./database/json/nsfw.json'))
 const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
@@ -778,23 +779,7 @@ case 'blackpink':
 				break 
 				
 				
-case 'ivvg':
-  if (!isUser) return reply(mess.only.userB)
-  
-  reply(mess.wait)
-    if(!isUrl(args[0]) && !args[0].includes('instagram')) return reply('Format link salah, gunakan link instagram')
-  play = body.slice(4)
-  try {
-  anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${lolKey}&url=${play}`)
-  lagu = await getBuffer(anu.result)
-  Zitsraa.sendMessage(from, lagu, video, {
-mimetype: 'video/mp4', filename: `Imlexa.mp4`, quoted: freply
-  })
-  
-  } catch {
-    reply(mess.ferr)
-  }
-  break
+
 				
 				case 'verify':
 					Zitsraa.updatePresence(from, Presence.composing)
@@ -1016,6 +1001,7 @@ case 'gemuk':
 ┣ ❏ ${prefix}bocilepep
 ┣ ❏ ${prefix}babu
 ┣ ❏ ${prefix}bucinserti
+┣ ❏ ${prefix}nickepep
 ┃
 ┣◪ 「 *ANIME* 」
 ┃
@@ -1458,28 +1444,7 @@ const duit = checkATMuser(sender)
     				break
     				
     				
-case 'semoji':
-				if (isBanned) return reply(mess.only.benned)    
-				if (!isUser) return reply(mess.only.userB)
-				
-				if (isLimit(sender)) return reply(limitend(pushname2))
-				if (args.length < 1) return reply('emoji??')
-				reply(mess.wait)
-					teks = `${body.slice(8)}`
-					emoji = emojiUnicode(teks).trim()
-					buff = `https://api.zeks.xyz/api/emoji-image?apikey=apivinz&emoji=${args[0]}`
-					voss = await fetch(buff)
-					ftype = require('file-type')
-					vuss = await ftype.fromStream(voss.body)
-					if (vuss !== undefined) {
-					costum(await getBuffer(buff), image, FarhanGans, `~ Emoji Maker`)
-					} else {
-					reply(mess.error.bug)
-					}
-					 await limitAdd(sender)
-					break
-    				
-    				
+
     				
     				
 case 'pbot':
@@ -2661,10 +2626,29 @@ case 'fml':
 				if (!isUser) return reply(mess.only.userB)
 				if (!isPublic) return reply(mess.only.publikG)
 					anu = await fetchJson(`https://api.zeks.xyz/api/fml`, {method: 'get'})
-					fmll = `*Fml* : *${anu.result}*`
+					fmll = `*Fml* : ${anu.result}`
 					Zitsraa.sendMessage(from, fmll, text, {quoted: freply})
 					await limitAdd(sender) 
 					break
+					
+					
+case 'nickepep':
+  if (!isPublic) return reply(mess.only.publikG)
+				if (isBanned) return reply(mess.only.benned)   
+				 if (isLimit(sender)) return reply(limitend(pushname2))
+				if (!isUser) return reply(mess.only.userB)
+				if (!isPublic) return reply(mess.only.publikG)
+					anu = await fetchJson(`https://api.zeks.xyz/api/nickepep?apikey=apivinz`, {method: 'get'})
+				tesy = `Nick Epep
+${anu.result}`
+					Zitsraa.sendMessage(from, tesy, text, {quoted: freply})
+					await limitAdd(sender) 
+					break
+					
+					
+					
+					
+					
 case 'love':
                 if (!isUser) return reply(mess.only.userB)
                 if (!isPublic) return reply(mess.only.publikG)
@@ -2876,7 +2860,7 @@ case 'randomcat':
 					bufferkk = await getBuffer(anu.result.url)
 					Zitsraa.sendMessage(from, bufferkk, image, {quoted: freply})
 					break
-					case 'jadian':
+		/*			case 'jadian':
 if (!isPublic) return reply(mess.only.publikG)
                     if (!isGroup) return reply(from, 'perintah ini hanya dapat digunakan di dalam grup', id)
 
@@ -2890,7 +2874,7 @@ if (!isPublic) return reply(mess.only.publikG)
 
                     Zitsraa.sendMessage(from, sapa)
 
-                    break
+                    break*/
 				case 'mlherolist':
 				  if (!isPublic) return reply(mess.only.publikG)
 				if (isBanned) return reply(mess.only.benned)    
@@ -5162,8 +5146,9 @@ case 'memeen':
 				  
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return reply('Apa yang mau dicari gan?')
-					anu = await fetchJson(`https://mnazria.herokuapp.com/api/arti?nama=${body.slice(6)}`, {method: 'get'})
-					Zitsraa.sendMessage(from, anu.result, text, {quoted: freply})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/artinama?apikey=${LolKey}&nama=${body.slice(10)}`, {method: 'get'})
+					buffer = await getBuffer(anu.result)
+					Zitsraa.sendMessage(from, buffer, text, {quoted: freply})
 					await limitAdd(sender) 
 					break 
 					
@@ -5484,10 +5469,10 @@ case 'addstik':
 				Zitsraa.sendMessage(from, `Sukses Menambahkan Sticker\nCek dengan cara ${prefix}liststik`, MessageType.text, { quoted: freply })
 				break
 case 'getstik':
-				namastc = body.slice(7)
+				namastc = body.slice(9)
 				try {
 				result = fs.readFileSync(`./temp/stick/${namastc}.webp`)
-				Zitsraa.sendMessage(from, result, sticker)
+				Zitsraa.sendMessage(from, result, sticker,{quoted:freply})
 				} catch {
 				  reply('Pack tidak terdaftar')
 				}
@@ -5596,6 +5581,39 @@ case 'addimg':
 				  reply('Pack tidak terdaftar')
 				}
 				break
+				
+				
+case 'addvid':
+				if (!isQuotedVideo) return reply('Reply vidionya')
+				if (!isOwner) return reply(mess.only.ownerB)
+				svst = body.slice(8)
+				if (!svst) return reply('Nama vidionya apa')
+				boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+				delb = await Zitsraa.downloadMediaMessage(boij)
+				imagenye.push(`${svst}`)
+				fs.writeFileSync(`./temp/video/${svst}.mp4`, delb)
+				fs.writeFileSync('./temp/video.json', JSON.stringify(imagenye))
+				Zitsraa.sendMessage(from, `Sukses Menambahkan video\nCek dengan cara ${prefix}listvideo`, MessageType.text, { quoted: freply })
+				break
+case 'listvid':
+				teks = '*List Video :*\n\n'
+				for (let awokwkwk of videonye) {
+					teks += `- ${awokwkwk}\n`
+				}
+				teks += `\n*Total : ${videonye.length}* `
+				Zitsraa.sendMessage(from, teks.trim(), extendedText, { quoted: freply, contextInfo: { "mentionedJid": imagenye } })
+				break
+			case 'getvid':
+				namastc = body.slice(8)
+				try {
+				buffer = fs.readFileSync(`./temp/video/${namastc}.mp4`)
+				Zitsraa.sendMessage(from, buffer, video, { quoted: freply, caption: `Result From Database : ${namastc}.mp4` })
+				} catch {
+				  reply('Pack tidak terdaftar')
+				}
+				break
+				
+				
 				
 			case 'listimg':
 				teks = '*List Image :*\n\n'
@@ -6177,17 +6195,31 @@ case 'leaderboard':
 				if (isLimit(sender)) return reply(limitend(pushname2))
 					if (args.length < 1) return reply('Masukan nama daerah!!')
 					sholat = `${body.slice(9)}`
-					anu = await fetchJson(`https://api.haipbis.xyz/jadwalsholat?daerah=${sholat}`, {method: 'get'})
+					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/sholat/${sholat}?apikey=${LolKey}`, {method: 'get'})
 					reply(mess.wait)
-					if (anu.result) return reply(anu.result)
-					jsol = `Jadwal sholat di ${sholat} hari ini adalah\n\n⚡Imsyak : ${res.data.Imsyak}\n⚡Subuh : ${res.data.Subuh} WIB\n⚡Dzuhur : ${res.data.Dzuhur}WIB\n⚡Ashar : ${res.data.Ashar} WIB\n⚡Maghrib : ${res.data.Maghrib}\n⚡Isya : ${res.data.Isya} WIB\n⚡Tengah malam : ${res.data.Dhuha} WIB`
+					jsol = `*Jadwal SHALAT*
+*Wilayah :* ${anu.result.wilayah}
+*Tanggal :* ${anu.result.tanggal}
+
+
+⚡Imsyak : ${anu.result.imsak} WIB
+⚡Subuh : ${anu.result.subuh} WIB
+⚡Dzuhur : ${anu.result.dzuhur}WIB
+⚡Ashar : ${anu.result.ashar} WIB
+⚡Maghrib : ${anu.result.maghrib} WIB
+⚡Isya : ${anu.result.isya} WIB
+⚡Dhuha : ${anu.result.dhuha} WIB
+
+
+*Note* : _Jangan lupa solat borr.._
+_Sholat itu ibadah_`
 					Zitsraa.sendMessage(from, jsol, text, {quoted: freply})
 					await limitAdd(sender) 
 					break 
 case 'xxx':
 			   if (isBanned) return reply(mess.only.benned)    
 			   if (!isUser) return reply(mess.only.userB)
-			   if (!isPremtod) return reply('premiumin tod!')
+			   if (!isPremiun) return reply('premiumin tod!')
 			   if (isLimit(sender)) return reply(limits.limitend(pushname2))
 			   reply(mess.wait)
               	    if (args.length < 1) return reply('teksnya mana gan?')
@@ -6291,7 +6323,7 @@ case 'wasted':
 // premium user
    case 'joox':
   if (!isUser) return reply(mess.only.userB)
-  if (!isPremtod) return reply('Mode premium Aktifin Ngab')
+  if (!isPremiun) return reply('Mode premium Aktifin Ngab')
   if (args.length < 1) return reply('Masukan judul lagu')
   tels = body.slice(6)
   try {
@@ -6332,14 +6364,14 @@ mimetype: 'audio/mp3', filename: `${data.result.title}.mp3`, quoted: freply
                 
                 
                 
-                case 'asup':
+                case 'asupan':
        if (isBanned) return reply(mess.only.benned)
                 if (!isPublic) return reply(mess.only.publikG)
 				if (!isUser) return reply(mess.only.userB)    
 				if (!isPremiun) return reply(mess.only.premiun)
                 
 					anu = await fetchJson(`http://lolhuman.herokuapp.com/api/asupan?apikey=${LolKey}`, {method: 'get'})
-					if (anu.error) return reply(anu.error)
+			
 			/*		ytt = `「 *INSTAGRAM* 」
 					
 *Nama:* ${anu.result.name}
@@ -6377,7 +6409,23 @@ case 'githubstalk':
 					await limitAdd(sender)
                 break
                 
-
+case 'ig':
+  if (!isUser) return reply(mess.only.userB)
+  
+  reply(mess.wait)
+  inil = args[0]
+  anu = await fetchJson(`https://api.zeks.xyz/api/ig?url=${inil}&apikey=apivinz`, {method:'get'})
+  ts = `    *INSTAGRAM*
+  
+ •Caption : ${anu.result.caption}
+ •Type : ${anu.result.type}
+ •Source : ${anu.result.url}
+ `
+ buffer = await getBuffer(anu.result.url)
+  Zitsraa.sendMessage(from, ts, text, {quoted: freply})
+  Zitsraa.sendMessage(from, buffer, video, {caption : ts ,quoted: freply})
+  break
+  
                 case 'ytmp4':
        if (isBanned) return reply(mess.only.benned)
                 if (!isPublic) return reply(mess.only.publikG)
@@ -6567,6 +6615,7 @@ case 'play':
 				
 Judul : ${anu.judul}
 Size : ${anu.size}
+Source : ${anu.source}
 				
 *Wait Kak....*\n*Zitsraa sedang mengirim lagu nya...*
 
@@ -6691,7 +6740,7 @@ if (isBanned) return reply(mess.only.benned)
 				break  
 				
 				
-case 'asupan':
+case 'asupehhean':
 				if (isBanned) return reply(mess.only.benned)
 				if (!isUser) return reply(mess.only.userB)
 				  
