@@ -38,10 +38,10 @@ Follow The Steps Below!
 ```bash
 > termux-setup-storage
 (after that tap on permission)
-> pkg update -y
-> pkg upgrade -y
-> pkg install git -y
-> pkg install nodejs
+> apt update -y
+> apt upgrade -y
+> apt install git -y
+> apt install nodejs
 > git clone https://github.com/Zitsraa/bot-whatsapp
 > cd bot-whatsapp
 > npm install
