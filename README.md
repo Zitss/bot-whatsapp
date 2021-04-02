@@ -8,7 +8,7 @@
 <a href="https://github.com/Zitsraaxyz"><img title="Author" src="https://img.shields.io/badge/Author-Zitsraa-blue.svg?style=for-the-badge&logo=github"></a>
 </p>
 <p align="center">
-<a href="https://github.com/Zitsraa/followers"><img title="Followers" src="https://img.shields.io/github/followers/Zitsraa?color=blue&style=flat-square"></a>
+<a href="https://github.com/Zitsraazyz/followers"><img title="Followers" src="https://img.shields.io/github/followers/Zitsraa?color=blue&style=flat-square"></a>
 <a href="https://github.com/Zitsraaxyz/megumikato2/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Zitsraa/bot-wa?color=red&style=flat-square"></a>
 <a href="https://github.com/Zitsraaxyz/megumikato2/network/members"><img title="Forks" src="https://img.shields.io/github/forks/Zitsraa/bot-wa?color=red&style=flat-square"></a>
 <a href="https://github.com/Zitsraaxyz/megumikato2/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/Zitsraa/bot-wa?label=Watchers&color=blue&style=flat-square"></a>
