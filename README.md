@@ -1,10 +1,9 @@
 <p align="center">
-<img src="https://avatars.githubusercontent.com/zitsraa" width="225" height="225"/>
+<img src="https://media.giphy.com/media/FeVg8ViEczcxG/giphy.gif" alt="GIF" width="150" height="128"/>
 </p>
 <p align="center">
-<a href="#"><img title="Zitsraa" src="https://img.shields.io/badge/Zitsraa-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
-</p>
-<p align="center">
+<a href="#"><img title="Zitsraa BOT" src="https://img.shields.io/badge/Zitsraa BOT-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
+</p>p align="center">
 <a href="https://github.com/Zitsraa"><img title="Author" src="https://img.shields.io/badge/Author-Zitsraa-blue.svg?style=for-the-badge&logo=github"></a>
 </p>
 <p align="center">
