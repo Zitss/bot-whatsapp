@@ -3,7 +3,7 @@
 </p>
 <p align="center">
 <a href="#"><img title="Zitsraa BOT" src="https://img.shields.io/badge/Zitsraa BOT-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
-</p>p align="center">
+</p>
 <a href="https://github.com/Zitsraa"><img title="Author" src="https://img.shields.io/badge/Author-Zitsraa-blue.svg?style=for-the-badge&logo=github"></a>
 </p>
 <p align="center">
